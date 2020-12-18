@@ -1,0 +1,1632 @@
+// ==UserScript==
+// @name       😷Project Covid😷
+// @namespace    -
+// @version    0.1
+// @description Private Mod
+// @author       LegitYT#9257
+// @match        *://sandbox.moomoo.io/*
+// @match        *://moomoo.io/*
+// @grant        none
+// @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+// @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
+// @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
+// @require https://cdn.jsdelivr.net/gh/emn178/js-sha3/build/sha3.min.js
+// ==/UserScript==
+
+(function() {
+    var kills = 10;
+
+setInterval(getkills, 250);
+
+function getkills(){
+    var count = parseInt(document.getElementById("killCounter").innerText);
+    if(count > kills){
+        doNewSend(["ch", ["People Infected="+count]]);
+    }
+    kills = count;
+}
+})();
+let mouseX;
+let mouseY;
+
+let width;
+let height;
+
+setInterval(() => {
+   if(clanToggle == 1) {
+        doNewSend(["9", [null]]);
+        doNewSend(["8", [animate(false, 5)]])
+    }
+    doNewSend(["testing", [6]]);
+}, 200);
+
+setInterval(() => {
+    if(messageToggle == 1) {
+        doNewSend(["ch", [animate(true, 5)]])
+    }
+}, 200);
+
+setInterval(() => {
+    if(autoaim == true) {
+        doNewSend(["2", [nearestEnemyAngle]]);
+    }
+}, 0);
+
+setInterval(() => {
+    if(autoprimary == true) {
+        doNewSend(["5", [primary, true]]);
+    }
+}, 0);
+
+setInterval(() => {
+    if(autosecondary == true) {
+        doNewSend(["5", [secondary, true]]);
+    }
+}, 0);
+
+setInterval(() => {
+    if(superinsta == true) {
+        window.open(url, true);
+    }
+}, 0);
+setInterval(() => {
+    if(hatToggle == 1) {
+        if(oldHat != normalHat) {
+            hat(normalHat);
+            console.log("Tried. - Hat")
+        }
+        if(oldAcc != normalAcc) {
+            acc(normalAcc);
+            console.log("Tried. - Acc")
+        }
+        oldHat = normalHat;
+        oldAcc = normalAcc
+    }
+}, 25);
+
+setInterval(() => {
+    if(BotToggle == 1) {
+        storeEquip(28);
+        doNewSend(["6", [3]]);
+        doNewSend(["6", [17]]);
+        doNewSend(["6", [31]]);
+        doNewSend(["6", [23]]);
+        doNewSend(["6", [9]]);
+        doNewSend(["6", [33]]);
+        doNewSend(["6", [4]]);
+        doNewSend(["6", [15]]);
+        doNewSend(["10", ["Why Killing Me?"]]);
+        doNewSend(["ch", ["This Bot Best You Nab!!"]]);
+        doNewSend(["33", [nearestEnemyAngle]]);
+        setTimeout( () => {
+            doNewSend(["ch", ['Stop Running Noob! Why Scared?']]);
+            doNewSend(["c", [1]]);
+        }, 50);}
+}, 1);
+
+function normal() {
+    hat(normalHat);
+    acc(normalAcc);
+}
+
+function aim(x, y){
+     var cvs = document.getElementById("gameCanvas");
+     cvs.dispatchEvent(new MouseEvent("mousemove", {
+         clientX: x,
+         clientY: y
+
+     }));
+}
+
+let coreURL = new URL(window.location.href);
+window.sessionStorage.force = coreURL.searchParams.get("fc");
+
+var nearestEnemy;
+var nearestEnemyAngle;
+var isEnemyNear;
+var primary;
+var secondary;
+var foodType;
+var wallType;
+var superinsta = true;
+var spikeType;
+var millType;
+var mineType;
+var boostType;
+var turretType;
+var spawnpadType;
+var autoaim = false;
+var autoprimary = false;
+var autosecondary = false;
+var tick = 1;
+var oldHat;
+var oldAcc;
+var enemiesNear;
+var normalHat;
+var normalAcc;
+var ws;
+var msgpack5 = msgpack;
+var boostDir;
+let myPlayer = {
+    id: null,
+    x: null,
+    y: null,
+    dir: null,
+    object: null,
+    weapon: null,
+    clan: null,
+    isLeader: null,
+    hat: null,
+    accessory: null,
+    isSkull: null
+};
+
+let healSpeed = 50;
+var messageToggle = 0;
+var attackMe = 1;
+let botmode3 = 0;
+var clanToggle = 0;
+let healToggle = 1;
+var BotToggle = 0;
+let hatToggle = 1;
+
+
+document.msgpack = msgpack;
+function n(){
+     this.buffer = new Uint8Array([0]);
+     this.buffer.__proto__ = new Uint8Array;
+     this.type = 0;
+}
+
+const CanvasAPI = document.getElementById("gameCanvas")
+CanvasAPI.addEventListener("mousedown", buttonPressD, false);
+
+function buttonPressD(e) {
+    if (AutoTank == true) {
+    if (e.button == 2) {
+            doNewSend(["13c", [1, 40, 0]]);
+            doNewSend(["13c", [0, 40, 0]]);
+            doNewSend(["13c", [0, 0, 1]]);
+            doNewSend(["13c", [1, 21, 1]]);
+            doNewSend(["13c", [0, 21, 1]]);
+            doNewSend(["7", [1]]);
+        setTimeout( () => {
+            doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["7", [1]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            if (myPlayer.y < 2400){
+                doNewSend(["13c", [0, 15, 0]]);
+            } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+                doNewSend(["13c", [0, 31, 0]]);
+            } else {
+	            doNewSend(["13c", [0, 12, 0]]);
+            }
+        }, 120);
+    }
+    }
+    if (AutoBull == true){
+    if (e.button == 0) {
+            doNewSend(["13c", [1, 7, 0]]);
+            doNewSend(["13c", [0, 7, 0]]);
+            doNewSend(["13c", [0, 0, 1]]);
+            doNewSend(["13c", [1, 18, 1]]);
+            doNewSend(["13c", [0, 18, 1]]);
+            doNewSend(["7", [1]]);
+        setTimeout( () => {
+            doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            if (myPlayer.y < 2400){
+                doNewSend(["13c", [0, 15, 0]]);
+            } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+                doNewSend(["13c", [0, 31, 0]]);
+            } else {
+	            doNewSend(["13c", [0, 12, 0]]);
+            }
+            doNewSend(["7", [1]]);
+        }, 120);
+    }
+}
+}
+
+WebSocket.prototype.oldSend = WebSocket.prototype.send;
+WebSocket.prototype.send = function(m){
+    if (!ws){
+        document.ws = this;
+
+        ws = this;
+        socketFound(this);
+    }
+    this.oldSend(m);
+};
+
+
+function socketFound(socket){
+    socket.addEventListener('message', function(message){
+        handleMessage(message);
+    });
+}
+
+function handleMessage(m){
+    let temp = msgpack5.decode(new Uint8Array(m.data));
+    let data;
+    if(temp.length > 1) {
+        data = [temp[0], ...temp[1]];
+        if (data[1] instanceof Array){
+            data = data;
+        }
+    } else {
+      data = temp;
+    }
+    let item = data[0];
+    if(!data) {return};
+
+    if(item === "io-init") {
+            let cvs = document.getElementById("gameCanvas");
+            width = cvs.clientWidth;
+            height = cvs.clientHeight;
+            $(window).resize(function() {
+                width = cvs.clientWidth;
+                height = cvs.clientHeight;
+            });
+            cvs.addEventListener("mousemove", e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+        }
+
+    if (item == "1" && myPlayer.id == null){
+        myPlayer.id = data[1];
+    }
+
+    if (item == "33") {
+        enemiesNear = [];
+        for(let i = 0; i < data[1].length / 13; i++) {
+            let playerInfo = data[1].slice(13*i, 13*i+13);
+            if(playerInfo[0] == myPlayer.id) {
+                myPlayer.x = playerInfo[1];
+                myPlayer.y = playerInfo[2];
+                myPlayer.dir = playerInfo[3];
+                myPlayer.object = playerInfo[4];
+                myPlayer.weapon = playerInfo[5];
+                myPlayer.clan = playerInfo[7];
+                myPlayer.isLeader = playerInfo[8];
+                myPlayer.hat = playerInfo[9];
+                myPlayer.accessory = playerInfo[10];
+                myPlayer.isSkull = playerInfo[11];
+            } else if(playerInfo[7] != myPlayer.clan || playerInfo[7] === null) {
+                enemiesNear.push(playerInfo);
+            }
+        }
+    }
+
+    isEnemyNear = false;
+    if(enemiesNear) {
+        nearestEnemy = enemiesNear.sort((a,b) => dist(a, myPlayer) - dist(b, myPlayer))[0];
+    }
+
+    if(nearestEnemy) {
+        nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
+        if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 0) {
+            isEnemyNear = true;
+            if(autoaim == false && myPlayer.hat != 7 && myPlayer.hat != 53) {
+                normalHat = 6;
+                if(primary != 8) {
+                    normalAcc = 19
+                }
+            };
+        }
+    }
+    if(isEnemyNear == false && autoaim == false) {
+        normalAcc = 11;
+        if (myPlayer.y < 2400){
+            normalHat = 15;
+        } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+            normalHat = 31;
+        } else {
+	        normalHat = 12;
+        }
+    }
+    if (!nearestEnemy) {
+        nearestEnemyAngle = myPlayer.dir;
+    }
+
+   if(item == "h" && data[1] == myPlayer.id) {
+       if(data[2] < 100 && data[2] > 0 && healToggle == 1) {
+           setTimeout( () => {
+               place(foodType, null);
+               place(foodType, null);
+               place(foodType, null);
+               place(foodType, null);
+           }, healSpeed);
+
+       }
+   }
+   update();
+        if(attackMe == 1) {
+        if(item == "h" && data[1] == myPlayer.id) {
+        if(data[2] < 100 && data[2] > 0) {
+        doNewSend(["ch", ['Warning-Your Getting Damaged!']]);
+
+        }
+    }
+    }
+}
+
+
+function doNewSend(sender){
+    ws.send(new Uint8Array(Array.from(msgpack5.encode(sender))));
+}
+
+function acc(id) {
+    doNewSend(["13c", [0, 0, 1]]);
+    doNewSend(["13c", [0, id, 1]]);
+}
+
+function hat(id) {
+    doNewSend(["13c", [0, id, 0]]);
+}
+
+
+function place(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) {
+    doNewSend(["5", [id, null]]);
+    doNewSend(["c", [1, angle]]);
+    doNewSend(["c", [0, angle]]);
+    doNewSend(["5", [myPlayer.weapon, true]]);
+}
+
+function placeQ(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) {
+    doNewSend(["5", [id, null]]);
+    doNewSend(["c", [1, boostDir]]);
+    doNewSend(["c", [0, boostDir]]);
+    doNewSend(["5", [myPlayer.weapon, true]]);
+    doNewSend(["2", [nearestEnemyAngle]]);
+}
+
+function boostSpike() {
+    if(boostDir == null) {
+        boostDir = nearestEnemyAngle;
+    }
+    place(spikeType, boostDir + toRad(90));
+    place(spikeType, boostDir - toRad(90));
+    place(boostType, boostDir);
+    doNewSend(["33", [boostDir]]);
+}
+
+var repeater = function(key, action, interval) {
+    let _isKeyDown = false;
+    let _intervalId = undefined;
+
+    return {
+        start(keycode) {
+            if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                _isKeyDown = true;
+                if(_intervalId === undefined) {
+                    _intervalId = setInterval(() => {
+                        action();
+                        if(!_isKeyDown){
+                            clearInterval(_intervalId);
+                            _intervalId = undefined;
+                            console.log("claered");
+                        }
+                    }, interval);
+                }
+            }
+        },
+
+        stop(keycode) {
+            if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                _isKeyDown = false;
+            }
+        }
+    };
+
+
+}
+
+
+const healer1 = repeater(51, () => {placeQ(foodType, boostDir);
+                                    placeQ(foodType, boostDir);
+                                    placeQ(foodType, boostDir)}, 50);
+const healer2 = repeater(81, () => {placeQ(foodType, boostDir);
+                                    placeQ(foodType, boostDir);
+                                    placeQ(foodType, boostDir)}, 50);
+const boostPlacer = repeater(70, () => {place(boostType)}, 0);
+const fourSpawnpader = repeater(75, fourSpawnpad, 0);
+const spikePlacer = repeater(86, () => {place(spikeType)}, 0);
+const millPlacer = repeater(78, () => {place(millType)}, 0);
+const turretPlacer = repeater(72, () => {place(turretType)}, 0);
+
+document.addEventListener('keydown', (e)=>{
+    spikePlacer.start(e.keyCode);
+    fourSpawnpader.start(e.keyCode);
+    healer1.start(e.keyCode);
+    healer2.start(e.keyCode);
+    boostPlacer.start(e.keyCode);
+    millPlacer.start(e.keyCode);
+    turretPlacer.start(e.keyCode);
+
+    if(e.keyCode == 220 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        BotToggle = (BotToggle + 1) % 2;
+            if(BotToggle == 0) {
+                document.title = "Bot: OFF"
+            } else {
+                document.title = "Bot: ON"
+            }
+    }
+    if (e.keyCode == 16 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["13c", [1, 11, 1]]);
+        doNewSend(["13c", [0, 11, 1]]);
+        doNewSend(["13c", [1, 12, 0]]);
+        doNewSend(["13c", [0, 12, 0]]);
+        doNewSend(["13c", [1, 31, 0]]);
+        doNewSend(["13c", [1, 15, 0]]);
+    }
+    if (e.keyCode == 67 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["13c", [1, 6, 0]]);
+        doNewSend(["13c", [0, 6, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [1, 19, 1]]);
+        doNewSend(["13c", [0, 19, 1]]);
+    }
+
+    if (e.keyCode == 76 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+    doNewSend(["ch", ['25+35+50 = ?']]);
+    doNewSend(["5", [secondary, true]]);
+    doNewSend(["c", [1]]);
+    doNewSend(["2", [nearestEnemyAngle]]);
+    doNewSend(["13c", [0, 53, 0]]);
+    doNewSend(["13c", [0, 19, 1]]);
+    setTimeout(() => {
+        doNewSend(["6", [12]]);
+        doNewSend(["2", [nearestEnemyAngle]]);
+    },100);
+    setTimeout(() => {
+        doNewSend(["6", [15]]);
+        doNewSend(["2", [nearestEnemyAngle]]);
+    },200);
+    setTimeout(() => {
+        doNewSend(["c", [null]]);
+        doNewSend(["5", [primary, true]]);
+        hat(lasthat)
+        acc(lastacc)
+    },300);
+    setTimeout(() => {
+        doNewSend(["2", [null]]);
+    },310);
+}
+
+    if (e.keyCode == 49 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autosecondary = false;
+        autoprimary = true;
+        setTimeout( () => {
+            autoprimary = false;
+        }, 330);
+    }
+
+    if (e.keyCode == 50 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoprimary = false;
+        autosecondary = true;
+        setTimeout( () => {
+            autosecondary = false;
+        }, 330);
+    }
+
+
+    if (e.keyCode == 73 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        for (let i=0;i<4;i++){
+             let angle = myPlayer.dir + toRad(i * 90);
+             place(boostType, angle)
+        }
+    }
+    if (e.keyCode == 80 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        for (let i=0;i<4;i++){
+             let angle = myPlayer.dir + toRad(i * 90);
+             place(wallType, angle)
+        }
+    }
+    if (e.keyCode == 79 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        for (let i=0;i<5;i++){
+             let angle = myPlayer.dir + toRad(i * 72);
+             place(millType, angle)
+        }
+    }
+    if (e.keyCode == 71 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        place(spikeType, myPlayer.dir + toRad(90));
+        place(spikeType, myPlayer.dir - toRad(90));
+        place(boostType, myPlayer.dir);
+        doNewSend(["33", [nearestEnemyAngle]]);
+    }
+    if (e.keyCode == 72 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        place(turretType, myPlayer.dir + toRad(45));
+        place(turretType, myPlayer.dir - toRad(45));
+    }
+      if(e.keyCode == 85 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["c", [1]]);
+        setTimeout( () => {
+            doNewSend(["6", [5]]);
+        }, instaSpeed - 130);
+
+        setTimeout( () => {
+           doNewSend(["ch", [spam2(false, 5)]]) //No chat
+            doNewSend(["c", [0, null]]);
+            doNewSend(["13c", [0, 53, 0]]);
+            place(spikeType, myPlayer.dir + toRad(0));
+            autoaim = false;
+        }, instaSpeed);
+    }
+    if (e.keyCode == 32 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        place(spikeType, myPlayer.dir + toRad(45));
+        place(spikeType, myPlayer.dir - toRad(45));
+    }
+    if (e.keyCode == 186 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        for (let i=0;i<4;i++){
+             let angle = myPlayer.dir + toRad(i * 90);
+             place(spikeType, angle)
+        }
+    }
+    if (e.keyCode == 84 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["13c", [1, 22, 0]]);
+        doNewSend(["13c", [0, 22, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 19, 1]]);
+    }
+
+    if (e.keyCode == 9 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["13c", [1, 11, 1]]);
+        doNewSend(["13c", [0, 11, 1]]);
+        doNewSend(["13c", [1, 12, 0]]);
+        doNewSend(["13c", [0, 12, 0]]);
+        doNewSend(["13c", [1, 31, 0]]);
+        doNewSend(["13c", [1, 15, 0]]);
+    }
+
+    if(e.keyCode == 106 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        healToggle = (healToggle + 1) % 2;
+    }
+
+    if(e.keyCode == 190 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [5]]);
+        doNewSend(["6", [17]]);
+        doNewSend(["6", [31]]);
+        doNewSend(["6", [23]]);
+        doNewSend(["6", [9]]);
+        doNewSend(["6", [38]]);
+        doNewSend(["6", [28]]);
+        doNewSend(["6", [25]]);
+    }
+
+    if(e.keyCode == 37 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [7]]);
+        doNewSend(["6", [17]]);
+        doNewSend(["6", [31]]);
+        doNewSend(["6", [27]]);
+        doNewSend(["6", [10]]);
+        doNewSend(["6", [38]]);
+        doNewSend(["6", [4]]);
+        doNewSend(["6", [15]]);
+    }
+    if (e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["ch", ["DiD ThaT HurT?!?"]]);
+    }
+    if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        setTimeout( () => {
+        doNewSend(["ch", ["          ReLoadinG.          "]]);
+        doNewSend(["5", [secondary, true]]);
+        }, 700)
+    }
+    if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        setTimeout( () => {
+        doNewSend(["ch", ["         ReLoadinG..         "]]);
+        doNewSend(["5", [secondary, true]]);
+        }, 1300)
+   }
+    if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        setTimeout( () => {
+        doNewSend(["ch", ["          !Reloaded!          "]]);
+        doNewSend(["5", [primary, true]]);
+        }, 2500)
+    }
+    if(e.keyCode == 38 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        messageToggle = (messageToggle + 1) % 2;
+    }
+
+    if(e.keyCode == 40 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        clanToggle = (clanToggle + 1) % 2;
+    }
+    if (e.keyCode == 9 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        if (myPlayer.y < 2400){
+            doNewSend(["13c", [0, 15, 0]]);
+        } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+            doNewSend(["13c", [0, 31, 0]]);
+        } else {
+	        doNewSend(["13c", [0, 12, 0]]);
+        }
+        doNewSend(["13c", [0, 11, 1]]);
+    }
+     if (e.keyCode == 90 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hat(40);
+        acc(21);
+    }
+     if (e.keyCode == 74 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hat(53);
+        acc(21);
+    }
+     if (e.keyCode == 75 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hat(7);
+        acc(13);
+    }
+if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+            autoprimary = true;
+            autosecondary = false;
+            autoaim = true;
+            autoprimary = true;
+            autosecondary = false;
+            doNewSend(["13c", [0, 0, 1]]);
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["7", [1]]);
+            doNewSend(["13c", [1, 7, 0]]);
+            doNewSend(["13c", [0, 7, 0]]);
+            doNewSend(["13c", [1, 21, 1]]);
+            doNewSend(["13c", [0, 21, 1]]);
+        setTimeout( () => {
+            autoprimary = false;
+            autosecondary = true;
+            doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["13c", [1, 53, 0]]);
+            doNewSend(["13c", [0, 53, 0]]);
+            doNewSend(["5", [secondary, true]]);
+        }, 100);
+        setTimeout( () => {
+            doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["7", [1]]);
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["13c", [0, 11, 1]]);
+            if (myPlayer.y < 2400){
+                doNewSend(["13c", [0, 15, 0]]);
+            } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+                doNewSend(["13c", [0, 31, 0]]);
+            } else {
+	            doNewSend(["13c", [0, 12, 0]]);
+            }
+            autosecondary = false;
+            autoaim = false;
+        }, 215);
+    }
+})
+document.addEventListener('keyup', (e)=>{
+    spikePlacer.stop(e.keyCode);
+    fourSpawnpader.stop(e.keyCode);
+    boostPlacer.stop(e.keyCode);
+    millPlacer.stop(e.keyCode);
+    turretPlacer.stop(e.keyCode);
+    healer1.stop(e.keyCode);
+    healer2.stop(e.keyCode);
+})
+
+
+function isElementVisible(e) {
+    return (e.offsetParent !== null);
+}
+
+function fourSpawnpad() {
+       place(spawnpadType, myPlayer.dir + toRad(135));
+       place(spawnpadType, myPlayer.dir + toRad(150));
+       place(spawnpadType, myPlayer.dir + toRad(165));
+       place(spawnpadType, myPlayer.dir + toRad(180));
+       place(spawnpadType, myPlayer.dir + toRad(270));
+       place(spawnpadType, myPlayer.dir + toRad(360));
+}
+
+function toRad(angle) {
+    return angle * 0.01745329251;
+}
+
+function dist(a, b){
+    return Math.sqrt( Math.pow((b.y-a[2]), 2) + Math.pow((b.x-a[1]), 2) );
+}
+
+function animate(space, chance) {
+    let result = '';
+    let characters;
+    if(space) {
+        characters = 'Project Covid Best Hack 2020';
+    } else {
+        characters = 'Covid';
+    }
+    if(space) {
+        characters = characters.padStart((30 - characters.length) / 2 + characters.length)
+        characters = characters.padEnd(30);
+    }
+    let count = 0;
+    for (let i = 0; i < characters.length; i++ ) {
+       if(Math.floor(Math.random() * chance) == 1 && characters.charAt(i) != "-" && count < 2 && characters.charAt(i) != " ") {
+           result += "_";
+           count++
+       } else {
+           result += characters.charAt(i);
+       }
+    }
+    return result;
+}
+
+function update() {
+    for (let i=0;i<9;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            primary = i;
+        }
+    }
+
+    for (let i=9;i<16;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            secondary = i;
+        }
+    }
+
+    for (let i=16;i<19;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            foodType = i - 16;
+        }
+    }
+
+    for (let i=19;i<22;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            wallType = i - 16;
+        }
+    }
+
+    for (let i=22;i<26;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            spikeType = i - 16;
+        }
+    }
+
+    for (let i=26;i<29;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            millType = i - 16;
+        }
+    }
+
+    for (let i=29;i<31;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            mineType = i - 16;
+        }
+    }
+
+    for (let i=31;i<33;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            boostType = i - 16;
+        }
+    }
+
+   for (let i=33;i<36;i++){
+       if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+           turretType = i - 16;
+       }
+   }
+
+   for (let i=36;i<37;i++){
+       if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+           spawnpadType = i - 16;
+       }
+   }
+
+   for (let i=37;i<39;i++){
+       if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+           turretType = i - 16;
+       }
+   }
+}
+$("#mapDisplay").css({background: `url('http://i.imgur.com/Qllo1mA.png')`});
+document.getElementById('gameName').innerHTML = '😷Project Covid😷';
+setInterval(() => {
+    setTimeout(() => {
+        document.getElementById("gameName").innerHTML = "😷_roject Covid😷"
+        setTimeout(() => {
+            document.getElementById("gameName").innerHTML = "😷P_oject Covid😷"
+            setTimeout(() => {
+                document.getElementById("gameName").innerHTML = "😷Pr_ject Covid😷"
+                setTimeout(() => {
+                    document.getElementById("gameName").innerHTML = "😷Pro_ect Covid😷"
+                    setTimeout(() => {
+                        document.getElementById("gameName").innerHTML = "😷Proj_ct Covid😷"
+                        setTimeout(() => {
+                            document.getElementById("gameName").innerHTML = "😷Proje_t Covid😷"
+                            setTimeout(() => {
+                                document.getElementById("gameName").innerHTML = "😷Projec_ Covid😷"
+                                setTimeout(() => {
+                                    document.getElementById("gameName").innerHTML = "😷Project _ovid😷"
+                                    setTimeout(() => {
+                                        document.getElementById("gameName").innerHTML = "😷Project C_vid😷"
+                                        setTimeout(() => {
+                                            document.getElementById("gameName").innerHTML = "😷Project Co_id😷"
+                                            setTimeout(() => {
+                                                document.getElementById("gameName").innerHTML = "😷Project Cov_d😷"
+                                                setTimeout(() => {
+                                                    document.getElementById("gameName").innerHTML = "😷Project Covi_😷"
+                                                }, 100);
+                                            }, 100);
+                                        }, 100);
+                                    }, 100);
+                                }, 100);
+                            }, 100);
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 100);
+}, 1850);
+setInterval(() => {
+    setTimeout(() => {
+        document.getElementById('chatBox').placeholder = "😷Message😷";
+        setTimeout(() => {
+            document.getElementById('chatBox').placeholder = "😷Message.😷";
+            setTimeout(() => {
+                document.getElementById('chatBox').placeholder = "😷Message..😷";
+                setTimeout(() => {
+                    document.getElementById('chatBox').placeholder = "😷Message...😷";
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 100);
+}, 500)
+document.getElementById('nameInput').placeholder = '😷Covid😷';
+setInterval(() => {
+    setTimeout(() => {
+        document.getElementById('nameInput').placeholder = "😷_ovid😷";
+        setTimeout(() => {
+            document.getElementById('nameInput').placeholder = "😷C_vid😷";
+            setTimeout(() => {
+                document.getElementById('nameInput').placeholder = "😷Co_id😷";
+                setTimeout(() => {
+                    document.getElementById('nameInput').placeholder = "😷Cov_d😷";
+                    setTimeout(() => {
+                        document.getElementById('nameInput').placeholder = "😷Covi_😷";
+                        setTimeout(() => {
+                            document.getElementById('nameInput').placeholder = "😷_ovid😷";
+                            setTimeout(() => {
+                                document.getElementById('nameInput').placeholder = "😷C_vid😷";
+                                setTimeout(() => {
+                                    document.getElementById('nameInput').placeholder = "😷Co_id😷";
+                                    setTimeout(() => {
+                                        document.getElementById('nameInput').placeholder = "😷Cov_d😷";
+                                        setTimeout(() => {
+                                            document.getElementById('nameInput').placeholder = "😷Covi_😷";
+                                            setTimeout(() => {
+                                                document.getElementById('nameInput').placeholder = "😷_ovid😷";
+                                                setTimeout(() => {
+                                                    document.getElementById('nameInput').placeholder = "😷C_vid😷";
+                                                }, 100);
+                                            }, 100);
+                                        }, 100);
+                                    }, 100);
+                                }, 100);
+                            }, 100);
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 100);
+}, 1850);
+document.getElementById('diedText').innerHTML = '😷You Got Infected!😷';
+setInterval(() => {
+    setTimeout(() => {
+        document.getElementById('diedText').innerHTML = "😷_ou Got Infected!😷";
+        setTimeout(() => {
+            document.getElementById('diedText').innerHTML = "😷Y_u Got Infected!😷";
+            setTimeout(() => {
+                document.getElementById('diedText').innerHTML = "😷You G_t Infected!😷";
+                setTimeout(() => {
+                    document.getElementById('diedText').innerHTML = "😷You Go_ Infected!😷";
+                    setTimeout(() => {
+                        document.getElementById('diedText').innerHTML = "😷You Got _nfected!😷";
+                        setTimeout(() => {
+                            document.getElementById('diedText').innerHTML = "😷You Got I_fected!😷";
+                            setTimeout(() => {
+                                document.getElementById('diedText').innerHTML = "😷You Got In_ected!😷";
+                                setTimeout(() => {
+                                    document.getElementById('diedText').innerHTML = "😷You Got Inf_cted!😷";
+                                    setTimeout(() => {
+                                        document.getElementById('diedText').innerHTML = "😷You Got Infe_ted!😷";
+                                        setTimeout(() => {
+                                            document.getElementById('diedText').innerHTML = "😷You Got Infec_ed!😷";
+                                            setTimeout(() => {
+                                                document.getElementById('diedText').innerHTML = "😷You Got Infect_d!😷";
+                                                setTimeout(() => {
+                                                    document.getElementById('diedText').innerHTML = "😷You Got Infecte_!😷";
+                                                }, 100);
+                                            }, 100);
+                                        }, 100);
+                                    }, 100);
+                                }, 100);
+                            }, 100);
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 100);
+}, 1850);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById('diedText').style.color = "orange";
+setTimeout( () => {
+document.getElementById('diedText').style.color = "yellow";
+setTimeout( () => {
+document.getElementById('diedText').style.color = "blue";
+setTimeout( () => {
+document.getElementById('diedText').style.color = "red";
+setTimeout( () => {
+document.getElementById('diedText').style.color = "green";
+setTimeout( () => {
+document.getElementById('diedText').style.color = "black";
+setTimeout( () => {
+document.getElementById('diedText').style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("storeHolder").style.backgroundColor = "orange";
+setTimeout( () => {
+document.getElementById("storeHolder").style.backgroundColor = "yellow";
+setTimeout( () => {
+document.getElementById("storeHolder").style.backgroundColor = "blue";
+setTimeout( () => {
+document.getElementById("storeHolder").style.style.backgroundColor = "red";
+setTimeout( () => {
+document.getElementById("storeHolder").style.backgroundColor = "green";
+setTimeout( () => {
+document.getElementById("storeHolder").style.backgroundColor = "black";
+setTimeout( () => {
+document.getElementById("storeHolder").style.backgroundColor = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "orange";
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "blue";
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "red";
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "green";
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "black";
+setTimeout( () => {
+document.getElementById("pingDisplay").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("inParty").style.color = "orange";
+setTimeout( () => {
+document.getElementById("inParty").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("inParty").style.color = "blue";
+setTimeout( () => {
+document.getElementById("inParty").style.color = "red";
+setTimeout( () => {
+document.getElementById("inParty").style.color = "green";
+setTimeout( () => {
+document.getElementById("inParty").style.color = "black";
+setTimeout( () => {
+document.getElementById("inParty").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("youtuberOf").style.color = "orange";
+setTimeout( () => {
+document.getElementById("youtuberOf").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("youtuberOf").style.color = "blue";
+setTimeout( () => {
+document.getElementById("youtubeOf").style.color = "red";
+setTimeout( () => {
+document.getElementById("youtuberOf").style.color = "green";
+setTimeout( () => {
+document.getElementById("youtubeOf").style.color = "black";
+setTimeout( () => {
+document.getElementById("youtuberOf").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "orange";
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "blue";
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "red";
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "green";
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "black";
+setTimeout( () => {
+document.getElementById("ytLink").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "orange";
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "blue";
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "red";
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "green";
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "black";
+setTimeout( () => {
+document.getElementById("serverBrowser").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "orange";
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "blue";
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "red";
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "green";
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "black";
+setTimeout( () => {
+document.getElementById("ot-floating-button__open").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+    setTimeout(() => {
+        document.getElementById('enterGame').innerHTML = "😷_on't Get Infected!😷!"
+        setTimeout(() => {
+            document.getElementById('enterGame').innerHTML = "😷D_n't Get Infected!😷!"
+            setTimeout(() => {
+                document.getElementById('enterGame').innerHTML = "😷Do_'t Get Infected!😷!"
+                setTimeout(() => {
+                    document.getElementById('enterGame').innerHTML = "😷Don'_ Get Infected!😷!"
+                    setTimeout(() => {
+                        document.getElementById('enterGame').innerHTML = "😷Don't _et Infected!😷!"
+                        setTimeout(() => {
+                            document.getElementById('enterGame').innerHTML = "😷Don't G_t Infected!😷!"
+                            setTimeout(() => {
+                                document.getElementById('enterGame').innerHTML = "😷Don't Ge_ Infected!😷!"
+                                setTimeout(() => {
+                                    document.getElementById('enterGame').innerHTML = "😷Don't Get _nfected!😷!"
+                                    setTimeout(() => {
+                                        document.getElementById('enterGame').innerHTML = "😷Don't Get In_ected!😷!"
+                                        setTimeout(() => {
+                                            document.getElementById('enterGame').innerHTML = "😷Don't Get Infe_ted!😷!"
+                                            setTimeout(() => {
+                                                document.getElementById('enterGame').innerHTML = "😷Don't Get Infec_ed!😷!"
+                                                setTimeout(() => {
+                                                    document.getElementById('enterGame').innerHTML = "😷Don't Get Infecte_!😷!"
+                                                }, 100);
+                                            }, 100);
+                                        }, 100);
+                                    }, 100);
+                                }, 100);
+                            }, 100);
+                        }, 100);
+                    }, 100);
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 100);
+}, 1850);
+document.getElementById("storeHolder").style = "height: 2200px; width: 450px;"
+document.getElementById("allianceHolder").style = "height: 2200px; width: 450px;"
+
+document.getElementById('adCard').remove();
+document.getElementById('errorNotification').remove();
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "orange";
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "blue";
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "red";
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "green";
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "black";
+setTimeout( () => {
+document.getElementById("leaderboard").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+document.getElementById("setupCard").style.color = "black";
+document.getElementById("promoImg").remove();
+document.getElementById("nameInput").style.color = "green"
+setTimeout( () => {
+document.getElementById("nameInput").style.color = "orange"
+}, 2000);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "blue";
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "red";
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "orange";
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "green";
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "black";
+setTimeout( () => {
+document.getElementById("woodDisplay").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "orange";
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "blue";
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "red";
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "green";
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "black";
+setTimeout( () => {
+document.getElementById("scoreDisplay").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "orange";
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "blue";
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "red";
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "green";
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "black";
+setTimeout( () => {
+document.getElementById("stoneDisplay").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "orange";
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "blue";
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "red";
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "green";
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "black";
+setTimeout( () => {
+document.getElementById("foodDisplay").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "orange";
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "blue";
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "red";
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "green";
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "black";
+setTimeout( () => {
+document.getElementById("killCounter").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("ageText").style.color = "orange";
+setTimeout( () => {
+document.getElementById("ageText").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("ageText").style.color = "blue";
+setTimeout( () => {
+document.getElementById("ageText").style.color = "red";
+setTimeout( () => {
+document.getElementById("ageText").style.color = "green";
+setTimeout( () => {
+document.getElementById("ageText").style.color = "black";
+setTimeout( () => {
+document.getElementById("ageText").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "orange";
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "blue";
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "red";
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "green";
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "black";
+setTimeout( () => {
+document.getElementById("allianceButton").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "orange";
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "blue";
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "red";
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "green";
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "black";
+setTimeout( () => {
+document.getElementById("chatButton").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "orange";
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "blue";
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "red";
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "green";
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "black";
+setTimeout( () => {
+document.getElementById("storeButton").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("gameName").style.color = "orange";
+setTimeout( () => {
+document.getElementById("gameName").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("gameName").style.color = "blue";
+setTimeout( () => {
+document.getElementById("gameName").style.color = "red";
+setTimeout( () => {
+document.getElementById("gameName").style.color = "green";
+setTimeout( () => {
+document.getElementById("gameName").style.color = "black";
+setTimeout( () => {
+document.getElementById("gameName").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "orange";
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "yellow";
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "blue";
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "red";
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "green";
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "black";
+setTimeout( () => {
+document.getElementById('loadingText').style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+document.getElementById('loadingText').innerHTML = '😷Loading Project Covid😷';
+setTimeout( () => {
+document.getElementById('loadingText').innerHTML = '✅Loading Succes!✅';
+}, 2000)
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "orange";
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "blue";
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "red";
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "green";
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "black";
+setTimeout( () => {
+document.getElementById("setupCard").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "orange";
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "blue";
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "red";
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "green";
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "black";
+setTimeout( () => {
+document.getElementById("linksContainer2").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "orange";
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "yellow";
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "blue";
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "red";
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "green";
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "black";
+setTimeout( () => {
+document.getElementById("joinPartyButton").style.color = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "orange";
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "yellow";
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "blue";
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "red";
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "green";
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "black";
+setTimeout( () => {
+document.getElementById("setupCard").style.backgroundColor = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "orange";
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "yellow";
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "blue";
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "red";
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "green";
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "black";
+setTimeout( () => {
+document.getElementById("guideCard").style.backgroundColor = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "orange";
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "yellow";
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "blue";
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "red";
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "green";
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "black";
+setTimeout( () => {
+document.getElementById("enterGame").style.backgroundColor = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+setInterval(() => {
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "orange";
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "yellow";
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "blue";
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "red";
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "green";
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "black";
+setTimeout( () => {
+document.getElementById("promoImgHolder").style.backgroundColor = "gold";
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);
+}, 100);}
+ , 700);
+
+$("#gameCanvas").css('cursor', 'url(http://cur.cursors-4u.net/games/gam-15/gam1422.gif), default');
+
+$("#ageBarContainer").append('</br><div id="hacktext"></div><div style="width: 100%;position: absolute;bottom: 94px;text-align: center;color:Red;font-size: 24px;" id="freetext"></div><div style="width: 100%;position: absolute;bottom: 144px;text-align: center;color: #ed3f00;font-size: 24px;" id="ptext"></div><div style="width: 100%;position: absolute;bottom: 224px;text-align: center;color: #9a008b;font-size: 24px;" id="ctext"></div><div style="width: 100%;position: absolute;top: 100px;text-align: center;color: white;font-size: 12px;" id="bilgitext">"Left Arrow" Katana Musket |"." Stick SpinningSpike PowerMill</div><div style="width: 100%;position: absolute;bottom: 170px;text-align: center;color: darkgreen;font-size: 24px;" id="atext"></div><div style="width: 100%;position: absolute;bottom: 196px;text-align: center;color: black;font-size: 24px;" id="mtext"></div>');
