@@ -1,0 +1,273 @@
+// ==UserScript==
+// @name        MillMod+
+// @namespace   -
+// @version     FINAL
+// @description maybe Subscribe to DarrkYT?
+// @author      You!
+// @match *://moomoo.io/*
+// @match *://sandbox.moomoo.io/*
+// @match *://dev.moomoo.io/*
+// @grant none
+// @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+
+// ==/UserScript==
+
+let hue = 0;
+
+let replaceInterval = setInterval(() => {
+if (CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = ((oldFunc) => function() { if (this.fillStyle == "#8ecc51") this.fillStyle = `hsl(${hue}, 100%, 50%)`; return oldFunc.call(this, ...arguments); })(CanvasRenderingContext2D.prototype.roundRect);
+  clearInterval(replaceInterval);
+}}, 10);
+
+function changeHue() {
+  hue += Math.random() * 2;
+}
+
+setInterval(changeHue, 0);
+
+(function() {
+    var Mill1;
+    var Mill2;
+    var Mill3;
+    var MillMod = true;
+document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 190 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        AutoMill = (AutoMill + 1) % 2;
+            if (AutoMill == 0) {
+                doNewSend(["ch", ["Auto Triple Mills Deactivated"]]);
+                document.title = "AUTO MILL: OFF"
+            }else {
+                doNewSend(["ch", ["Did I Subscribe to #DarrkYT?"]]);
+                document.title = "AUTO MILL: ON"
+            }
+                e.preventDefault();
+                if (MillMod) {
+                    Mill1 = setTimeout(function() {
+                        h1();
+                    }, 0);
+                } else {
+                    clearTimeout(Mill1);
+                    clearTimeout(Mill2);
+                    clearTimeout(Mill3);
+                                    }
+                MillMod = !MillMod;
+            }
+        }
+    );
+
+
+
+    function h1() {
+        clearTimeout(Mill1);
+        place(millType, myPlayer.dir + toRad(90));
+        place(millType, myPlayer.dir + toRad(270));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h1();
+        }, 100);
+    }
+    function h2() {
+        clearTimeout(Mill2);
+        place(millType, myPlayer.dir + toRad(90));
+        place(millType, myPlayer.dir + toRad(0));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h2();
+        }, 100);
+    }
+        function h3() {
+        clearTimeout(Mill3);
+        place(millType, myPlayer.dir + toRad(90));
+        place(millType, myPlayer.dir + toRad(0));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h3();
+        }, 100);
+    }
+})();
+
+var dist;
+var mouseX;var mouseY;var ws;var millType;var width;var height;var msgpack5 = msgpack;document.msgpack = msgpack;WebSocket.prototype.oldSend = WebSocket.prototype.send;
+var AutoMill = 0;
+document.msgpack = msgpack;
+WebSocket.prototype.oldSend = WebSocket.prototype.send;
+WebSocket.prototype.send = function(m){
+if (!ws){
+document.ws = this;
+ws = this;
+socketFound(this);}
+this.oldSend(m);};
+function socketFound(socket){socket.addEventListener('message', function(message){handleMessage(message);});}
+let myPlayer = {id: null,x: null,y: null,dir: null,object: null,weapon: null,clan: null,isLeader: null,hat: null,accessory: null,isSkull: null};var enemiesNear;var enemyX;var enemyY;var isEnemyNear;var nearestEnemy;var nearestEnemyAngle
+var repeater = function(key, action, interval) { let _isKeyDown = false; let _intervalId = undefined; return { start(keycode) { if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') { _isKeyDown = true; if(_intervalId === undefined) { _intervalId = setInterval(() => { action(); if(!_isKeyDown){ clearInterval(_intervalId); _intervalId = undefined; } }, interval); } } }, stop(keycode) { if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') { _isKeyDown = false; } } }; }
+function toRad(angle) {return angle * 0.01745329251;}
+function handleMessage(m){ let temp = msgpack5.decode(new Uint8Array(m.data)); let data; if(temp.length > 1) { data = [temp[0], ...temp[1]]; if (data[1] instanceof Array){ data = data; } } else { data = temp; } let item = data[0]; if(!data) {return}; if(item === "io-init") { let cvs = document.getElementById("gameCanvas"); width = cvs.clientWidth; height = cvs.clientHeight; $(window).resize(function() { width = cvs.clientWidth; height = cvs.clientHeight; }); cvs.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; }); } if (item == "1" && myPlayer.id == null){ myPlayer.id = data[1]; } if (item == "33") { enemiesNear = []; for(let i = 0; i < data[1].length / 13; i++) { let playerInfo = data[1].slice(13*i, 13*i+13); if(playerInfo[0] == myPlayer.id) { myPlayer.x = playerInfo[1]; myPlayer.y = playerInfo[2]; myPlayer.dir = playerInfo[3]; myPlayer.object = playerInfo[4]; myPlayer.weapon = playerInfo[5]; myPlayer.clan = playerInfo[7]; myPlayer.isLeader = playerInfo[8]; myPlayer.hat = playerInfo[9]; myPlayer.accessory = playerInfo[10]; myPlayer.isSkull = playerInfo[11]; } else if(playerInfo[7] != myPlayer.clan || playerInfo[7] === null) { enemiesNear.push(playerInfo); } } } isEnemyNear = false; if(enemiesNear) { nearestEnemy = enemiesNear.sort((a,b) => dist(a, myPlayer) - dist(b, myPlayer))[0]; } if(nearestEnemy) { nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x); if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 480) { isEnemyNear = true; } } if (!nearestEnemy) { nearestEnemyAngle = myPlayer.dir; } update(); }
+document.getElementById("adCard").remove();
+function place(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) { doNewSend(["5", [id, null]]); doNewSend(["c", [1, angle]]); doNewSend(["c", [0, angle]]); doNewSend(["5", [myPlayer.weapon, true]]); }
+function isElementVisible(e) {return (e.offsetParent !== null);}
+function doNewSend(sender){ws.send(new Uint8Array(Array.from(msgpack5.encode(sender))));}
+document.addEventListener('keydown', (e)=>{
+})
+const rep0 = repeater(n, () => {place(mill)},0)
+const millPlacer = repeater(78, () => {place(millType)}, 0);
+document.addEventListener('keyup', (e)=>{
+rep0.stop(e.keyCode)
+})
+document.addEventListener('keydown', (e)=>{
+rep0.start(e.keyCode)
+
+})
+function update() {
+for (let i=26;i<29;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            millType = i - 16;
+        }
+    }
+}
+RAW Paste Data
+// ==UserScript==
+// @name        MillMod+
+// @namespace   -
+// @version     FINAL
+// @description maybe Subscribe to DarrkYT?
+// @author      You!
+// @match *://moomoo.io/*
+// @match *://sandbox.moomoo.io/*
+// @match *://dev.moomoo.io/*
+// @grant none
+// @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+
+// ==/UserScript==
+
+let hue = 0;
+
+let replaceInterval = setInterval(() => {
+if (CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = ((oldFunc) => function() { if (this.fillStyle == "#8ecc51") this.fillStyle = `hsl(${hue}, 100%, 50%)`; return oldFunc.call(this, ...arguments); })(CanvasRenderingContext2D.prototype.roundRect);
+  clearInterval(replaceInterval);
+}}, 10);
+
+function changeHue() {
+  hue += Math.random() * 2;
+}
+
+setInterval(changeHue, 0);
+
+(function() {
+    var Mill1;
+    var Mill2;
+    var Mill3;
+    var MillMod = true;
+document.addEventListener('keydown', function(e) {
+        if (e.keyCode == 190 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        AutoMill = (AutoMill + 1) % 2;
+            if (AutoMill == 0) {
+                doNewSend(["ch", ["Auto Triple Mills Deactivated"]]);
+                document.title = "AUTO MILL: OFF"
+            }else {
+                doNewSend(["ch", ["Did I Subscribe to #DarrkYT?"]]);
+                document.title = "AUTO MILL: ON"
+            }
+                e.preventDefault();
+                if (MillMod) {
+                    Mill1 = setTimeout(function() {
+                        h1();
+                    }, 0);
+                } else {
+                    clearTimeout(Mill1);
+                    clearTimeout(Mill2);
+                    clearTimeout(Mill3);
+                                    }
+                MillMod = !MillMod;
+            }
+        }
+    );
+
+
+
+    function h1() {
+        clearTimeout(Mill1);
+        place(millType, myPlayer.dir + toRad(90));
+        place(millType, myPlayer.dir + toRad(270));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h1();
+        }, 100);
+    }
+    function h2() {
+        clearTimeout(Mill2);
+        place(millType, myPlayer.dir + toRad(90));
+        place(millType, myPlayer.dir + toRad(0));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h2();
+        }, 100);
+    }
+        function h3() {
+        clearTimeout(Mill3);
+        place(millType, myPlayer.dir + toRad(90));
+        place(millType, myPlayer.dir + toRad(0));
+        place(millType, myPlayer.dir + toRad(0));
+        Mill1 = setTimeout(function() {
+            h3();
+        }, 100);
+    }
+})();
+
+var dist;
+var mouseX;var mouseY;var ws;var millType;var width;var height;var msgpack5 = msgpack;document.msgpack = msgpack;WebSocket.prototype.oldSend = WebSocket.prototype.send;
+var AutoMill = 0;
+document.msgpack = msgpack;
+WebSocket.prototype.oldSend = WebSocket.prototype.send;
+WebSocket.prototype.send = function(m){
+if (!ws){
+document.ws = this;
+ws = this;
+socketFound(this);}
+this.oldSend(m);};
+function socketFound(socket){socket.addEventListener('message', function(message){handleMessage(message);});}
+let myPlayer = {id: null,x: null,y: null,dir: null,object: null,weapon: null,clan: null,isLeader: null,hat: null,accessory: null,isSkull: null};var enemiesNear;var enemyX;var enemyY;var isEnemyNear;var nearestEnemy;var nearestEnemyAngle
+var repeater = function(key, action, interval) { let _isKeyDown = false; let _intervalId = undefined; return { start(keycode) { if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') { _isKeyDown = true; if(_intervalId === undefined) { _intervalId = setInterval(() => { action(); if(!_isKeyDown){ clearInterval(_intervalId); _intervalId = undefined; } }, interval); } } }, stop(keycode) { if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') { _isKeyDown = false; } } }; }
+function toRad(angle) {return angle * 0.01745329251;}
+function handleMessage(m){ let temp = msgpack5.decode(new Uint8Array(m.data)); let data; if(temp.length > 1) { data = [temp[0], ...temp[1]]; if (data[1] instanceof Array){ data = data; } } else { data = temp; } let item = data[0]; if(!data) {return}; if(item === "io-init") { let cvs = document.getElementById("gameCanvas"); width = cvs.clientWidth; height = cvs.clientHeight; $(window).resize(function() { width = cvs.clientWidth; height = cvs.clientHeight; }); cvs.addEventListener("mousemove", e => { mouseX = e.clientX; mouseY = e.clientY; }); } if (item == "1" && myPlayer.id == null){ myPlayer.id = data[1]; } if (item == "33") { enemiesNear = []; for(let i = 0; i < data[1].length / 13; i++) { let playerInfo = data[1].slice(13*i, 13*i+13); if(playerInfo[0] == myPlayer.id) { myPlayer.x = playerInfo[1]; myPlayer.y = playerInfo[2]; myPlayer.dir = playerInfo[3]; myPlayer.object = playerInfo[4]; myPlayer.weapon = playerInfo[5]; myPlayer.clan = playerInfo[7]; myPlayer.isLeader = playerInfo[8]; myPlayer.hat = playerInfo[9]; myPlayer.accessory = playerInfo[10]; myPlayer.isSkull = playerInfo[11]; } else if(playerInfo[7] != myPlayer.clan || playerInfo[7] === null) { enemiesNear.push(playerInfo); } } } isEnemyNear = false; if(enemiesNear) { nearestEnemy = enemiesNear.sort((a,b) => dist(a, myPlayer) - dist(b, myPlayer))[0]; } if(nearestEnemy) { nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x); if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 480) { isEnemyNear = true; } } if (!nearestEnemy) { nearestEnemyAngle = myPlayer.dir; } update(); }
+document.getElementById("adCard").remove();
+function place(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) { doNewSend(["5", [id, null]]); doNewSend(["c", [1, angle]]); doNewSend(["c", [0, angle]]); doNewSend(["5", [myPlayer.weapon, true]]); }
+function isElementVisible(e) {return (e.offsetParent !== null);}
+function doNewSend(sender){ws.send(new Uint8Array(Array.from(msgpack5.encode(sender))));}
+document.addEventListener('keydown', (e)=>{
+})
+const rep0 = repeater(n, () => {place(mill)},0)
+const millPlacer = repeater(78, () => {place(millType)}, 0);
+document.addEventListener('keyup', (e)=>{
+rep0.stop(e.keyCode)
+})
+document.addEventListener('keydown', (e)=>{
+rep0.start(e.keyCode)
+
+})
+function update() {
+for (let i=26;i<29;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            millType = i - 16;
+        }
+    }
+}
+Public Pastes
+Untitled
+Bash | 19 min ago
+wtf
+Bash | 19 min ago
+Untitled
+Bash | 22 min ago
+Untitled
+Bash | 26 min ago
+Untitled
+Bash | 27 min ago
+Error for accumulated scripts turned into one!
+Bash | 1 hour ago
+Trying some pyqt5 source from somewhere...
+Python | 1 hour ago
+dropdown
