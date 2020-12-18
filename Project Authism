@@ -1,0 +1,3917 @@
+// come under ok?
+// ==UserScript==Century Golden Edition
+// @name           Century Golden Edition
+// @namespace      ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎
+// @version        1.0.0
+// @description    ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎
+// @author         ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎‏‏‎ ‎
+// @match        *://moomoo.io/*
+// @match          *://*moomoo.io/*
+// @match          *://dev.moomoo.io/*
+// @match          *://*sandbox.moomoo.io/*
+// @require https://greasyfork.org/scripts/368273-msgpack/code/msgpack.js?version=598723
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+// @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
+// @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
+// @icon           data:image/jpeg;base64,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
+
+//Version 0.0.1 : it's a copy of 406GodMod (My other hack).
+//Version 0.0.2 : Added better auto heal , better chat box , 3Spikes For boost and Quad Spikes.
+//Version 0.0.3 : Added Fast heal (Can heal insta) + Auto aim.
+//Version 1.0.0 : Changed name to a premium hack
+/*
+:
+Menu added
+chat menu added
+auto bull added
+fealtured motuber added
+*/
+//Need to add :
+//Insta Bull on space
+//Have 3 perfs insta (or only one) Insta 2 and 3 is perf
+//Add a menu
+//Betters cps for the macro
+//AutoFind
+//CycleChat
+//Do smthing with the autoaim (autosoldier ect)
+
+/*
+ * Cryptage de César
+ * [http://lwh.free.fr/pages/algo/crypto/cesar.htm]
+ */
+
+
+try {
+document.getElementById("moomooio_728x90_home").style.display = "none";
+    $("#moomooio_728x90_home").parent().css({display: "none"});
+} catch (e) {
+  console.log(" removing ad");
+}
+
+unsafeWindow.onbeforeunload = null;
+
+
+let mouseX;
+let mouseY;
+
+let width;
+let height;
+
+setInterval(() => {
+   if(clanToggle == 1) {
+        doNewSend(["9", [null]]);
+        doNewSend(["8", [animate(false, 5)]])
+    }
+    doNewSend(["testing", [6]]);
+}, 200);
+
+setInterval(() => {
+    if(messageToggle == 1) {
+        doNewSend(["ch", [animate(true, 5)]])
+    }
+}, 200);
+
+setInterval(() => {
+    if(autoaim == true) {
+        doNewSend(["2", [nearestEnemyAngle]]);
+    }
+}, 0);
+
+setInterval(() => {
+   if(hatToggle == 1) {
+       if(oldHat != normalHat) {
+           hat(normalHat);
+           console.log("Tried. - Hat")
+       }
+       if(oldAcc != normalAcc) {
+           acc(normalAcc);
+           console.log("Tried. - Acc")
+       }
+       oldHat = normalHat;
+       oldAcc = normalAcc
+   }
+}, 25);
+function normal() {
+   hat(normalHat);
+   acc(normalAcc);
+}
+
+function aim(x, y){
+     var cvs = document.getElementById("gameCanvas");
+     cvs.dispatchEvent(new MouseEvent("mousemove", {
+         clientX: x,
+         clientY: y
+
+     }));
+}
+function acc(id) {
+    doNewSend(["13c", [0, 0, 1]]);
+    doNewSend(["13c", [0, id, 1]]);
+}
+
+function hat(id) {
+    doNewSend(["13c", [0, id, 0]]);
+}
+
+
+let coreURL = new URL(window.location.href);
+window.sessionStorage.force = coreURL.searchParams.get("fc");
+
+var nearestEnemy;
+var nearestEnemyAngle;
+var isEnemyNear;
+var instaSpeed = 100;
+var primary;
+var secondary;
+var foodType;
+var wallType;
+var spikeType;
+var millType;
+var mineType;
+var instaSpeed1 = 200;
+var boostType;
+var turretType;
+var spawnpadType;
+var autoaim = false;
+var tick = 1;
+var oldHat;
+var oldAcc;
+var enemiesNear;
+var normalHat;
+var normalAcc;
+var ws;
+var msgpack5 = msgpack;
+var boostDir;
+let myPlayer = {
+   id: null,
+   x: null,
+   y: null,
+   dir: null,
+   object: null,
+   weapon: null,
+   clan: null,
+   isLeader: null,
+   hat: null,
+   accessory: null,
+   isSkull: null
+};
+$("#consentBlock").css({display: "none"});
+var autoHealSpeed = 57;
+var DEFAULT_HAT = 7;
+var DEFAULT_WINGS = 18;
+var instaKillKey = 114;
+var spikeKey = 113;
+var trapKey = 121;
+var removeMonkeyTail = true;
+var askMeAgain = true;
+
+var allTraps = [];
+var CORESTATE = {
+		inwater: {active: false},
+		nearenemy: {active: false},
+		intrap: {active: false},
+		ipress: {active: false},
+};
+
+let instaToggle = 1;
+let healSpeed = 57;
+let AimToggle = 2;
+var messageToggle = 0;
+var clanToggle = 0;
+let healToggle = 2;
+let hatToggle = 1;
+
+
+document.msgpack = msgpack;
+function n(){
+    this.buffer = new Uint8Array([0]);
+    this.buffer.__proto__ = new Uint8Array;
+    this.type = 0;
+}
+
+WebSocket.prototype.oldSend = WebSocket.prototype.send;
+WebSocket.prototype.send = function(m){
+   if (!ws){
+       document.ws = this;
+
+       ws = this;
+       socketFound(this);
+   }
+   this.oldSend(m);
+};
+
+
+function socketFound(socket){
+   socket.addEventListener('message', function(message){
+       handleMessage(message);
+   });
+}
+
+function handleMessage(m){
+   let temp = msgpack5.decode(new Uint8Array(m.data));
+   let data;
+   if(temp.length > 1) {
+       data = [temp[0], ...temp[1]];
+       if (data[1] instanceof Array){
+           data = data;
+       }
+   } else {
+     data = temp;
+   }
+   let item = data[0];
+   if(!data) {return};
+
+   if(item === "io-init") {
+           let cvs = document.getElementById("gameCanvas");
+           width = cvs.clientWidth;
+           height = cvs.clientHeight;
+           $(window).resize(function() {
+               width = cvs.clientWidth;
+               height = cvs.clientHeight;
+           });
+           cvs.addEventListener("mousemove", e => {
+               mouseX = e.clientX;
+               mouseY = e.clientY;
+           });
+       }
+
+   if (item == "1" && myPlayer.id == null){
+       myPlayer.id = data[1];
+   }
+
+   if (item == "33") {
+       enemiesNear = [];
+       for(let i = 0; i < data[1].length / 13; i++) {
+           let playerInfo = data[1].slice(13*i, 13*i+13);
+           if(playerInfo[0] == myPlayer.id) {
+               myPlayer.x = playerInfo[1];
+               myPlayer.y = playerInfo[2];
+               myPlayer.dir = playerInfo[3];
+               myPlayer.object = playerInfo[4];
+               myPlayer.weapon = playerInfo[5];
+               myPlayer.clan = playerInfo[7];
+               myPlayer.isLeader = playerInfo[8];
+               myPlayer.hat = playerInfo[9];
+               myPlayer.accessory = playerInfo[10];
+               myPlayer.isSkull = playerInfo[11];
+           } else if(playerInfo[7] != myPlayer.clan || playerInfo[7] === null) {
+               enemiesNear.push(playerInfo);
+           }
+       }
+   }
+
+   isEnemyNear = false;
+   if(enemiesNear) {
+       nearestEnemy = enemiesNear.sort((a,b) => dist(a, myPlayer) - dist(b, myPlayer))[0];
+   }
+   if(nearestEnemy) {
+       nearestEnemyAngle = Math.atan2(nearestEnemy[2]-myPlayer.y, nearestEnemy[1]-myPlayer.x);
+       if(Math.sqrt(Math.pow((myPlayer.y-nearestEnemy[2]), 2) + Math.pow((myPlayer.x-nearestEnemy[1]), 2)) < 280) {
+           isEnemyNear = true;
+           if(autoaim == false && myPlayer.hat != 7 && myPlayer.hat != 53) {
+               normalHat = 6;
+               if(primary != 8) {
+                   normalAcc = 21
+               }
+           };
+       }
+   }
+   if(isEnemyNear == false && autoaim == false) {
+       normalAcc = 11;
+       if (myPlayer.y < 2400){
+           normalHat = 15;
+       } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+           normalHat = 31;
+       } else {
+            normalHat = 12;
+       }
+   }
+   if (!nearestEnemy) {
+       nearestEnemyAngle = myPlayer.dir;
+   }
+
+
+    if(item == "h" && data[1] == myPlayer.id) {
+        if(data[2] < 100 && data[2] > 0 && healToggle == 1) {
+                         setTimeout( () => {
+                 place(foodType, null);
+                                                     doNewSend(["ch", [ichatheal(true, 5)]])
+
+             }, );
+             setTimeout( () => {
+                 place(foodType, null);
+                                  place(foodType, null);
+                                  place(foodType, null);
+                 doNewSend(["ch", [ichatheal(true, 5)]])
+
+             }, 240);
+        }
+    }
+        if(item == "h" && data[1] == myPlayer.id) {
+        if(data[2] < 100 && data[2] > 0 && healToggle == 2) {
+            setTimeout( () => {
+                place(foodType, null);
+                place(foodType, null);
+                                        doNewSend(["ch", [ichatheal(true, 5)]])
+
+                place(foodType, null);
+                place(foodType, null);
+                place(foodType, null);
+            }, 57);
+        }
+    }
+        if ( instaToggle == 1){
+            instaSpeed = 93;
+            instaSpeed1 = 205;
+        }
+
+
+     if ( instaToggle == 2){
+            instaSpeed = 100;
+            instaSpeed1 = 255;
+        }
+      if ( instaToggle == 3){
+            instaSpeed = 140;
+            instaSpeed1 = 310;
+        }
+        if(item == "h" && data[1] == myPlayer.id) {
+        if(data[2] < 100 && data[2] > 0 && healToggle == 3) {
+  setTimeout( () => {
+                place(foodType, null);
+                              doNewSend(["ch", [ichatheal(true, 5)]])
+
+                   }, );
+  setTimeout( () => {
+                 place(foodType, null);
+                              doNewSend(["ch", [ichatheal(true, 5)]])
+
+                place(foodType, null);
+      place(foodType, null);
+             }, 240);
+        }
+    }
+    update();
+}
+
+
+function doNewSend(sender){
+    ws.send(new Uint8Array(Array.from(msgpack5.encode(sender))));
+}
+
+
+
+function place(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) {
+    doNewSend(["5", [id, null]]);
+    doNewSend(["c", [1, angle]]);
+    doNewSend(["c", [0, angle]]);
+        doNewSend(["5", [myPlayer.weapon, true]]);
+}
+
+
+
+function boostSpike() {
+     if(boostDir == null) {
+        boostDir = nearestEnemyAngle;
+    }
+    place(spikeType, boostDir + toRad(90));
+    place(spikeType, boostDir - toRad(90));
+    place(boostType, boostDir);
+    doNewSend(["33", [boostDir]]);
+}
+function Spike3() {
+    if(boostDir == null) {
+    }
+    place(spikeType, myPlayer.dir + toRad(45));
+    place(spikeType, myPlayer.dir - toRad(45));
+  place(spikeType, myPlayer.dir + toRad(45));
+    place(spikeType, myPlayer.dir - toRad(45));
+
+    doNewSend(["33", [myPlayer.dir]]);
+}
+var repeater = function(key, action, interval) {
+    let _isKeyDown = false;
+    let _intervalId = undefined;
+
+    return {
+        start(keycode) {
+            if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                _isKeyDown = true;
+                if(_intervalId === undefined) {
+                    _intervalId = setInterval(() => {
+                        action();
+                        if(!_isKeyDown){
+                            clearInterval(_intervalId);
+                            _intervalId = undefined;
+                            console.log("claered");
+                        }
+                    }, interval);
+                }
+            }
+        },
+
+        stop(keycode) {
+            if(keycode == key && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                _isKeyDown = false;
+            }
+        }
+    };
+
+
+}
+
+const healer = repeater(81, () => {place(foodType)}, );
+const boostPlacer = repeater(70, () => {place(boostType)}, -1000);
+const wallPlacer = repeater(52, () => {place(wallType)}, );
+const spikePlacer = repeater(86, () => {place(spikeType)}, -1000 );
+const millPlacer = repeater(78, () => {place(millType)},-1000 );
+const turretPlacer = repeater(72, () => {place(turretType)}, -1000);
+const boostSpiker = repeater(71, boostSpike, );
+const Spiker3 = repeater(90, Spike3, );
+
+document.addEventListener('keydown', (e)=>{
+    spikePlacer.start(e.keyCode);
+    healer.start(e.keyCode);
+    boostPlacer.start(e.keyCode);
+    boostSpiker.start(e.keyCode);
+    Spiker3.start(e.keyCode);
+    millPlacer.start(e.keyCode);
+    turretPlacer.start(e.keyCode);
+    wallPlacer.start(e.keyCode);
+// auto chats codes part-1
+    if(e.keyCode == 81 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 70 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 90 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 71 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 52 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 86 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 72 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+                        if(e.keyCode == 78 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                           doNewSend(["ch", [ichatplace(true, 5)]])
+
+    }
+
+ if(e.keyCode == 82 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                        setTimeout( () => {
+        autoaim = true;
+                }, 150 );
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 19, 1]]);
+        doNewSend(["c", [1]]);
+          setTimeout( () => {
+                    doNewSend(["13c", [0, 53, 0]]);
+            doNewSend(["5", [secondary, true]]);
+        }, instaSpeed );
+
+        setTimeout( () => {
+                    doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["c", [0, null]]);
+            doNewSend(["13c", [0, 6, 0]]);
+              autoaim = false;
+                        doNewSend(["ch", [Insta(true, 5)]])
+        }, instaSpeed1);
+        setTimeout( () =>{
+        doNewSend(["13c", [0, 11, 1]]);
+        }, 300 );
+
+    }
+
+  if(e.keyCode == 226 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+
+        doNewSend(["5", [primary, true]]);
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 19, 1]]);
+        doNewSend(["c", [1]]);
+
+        setTimeout( () => {
+
+            doNewSend(["13c", [0, 53, 0]]);
+            doNewSend(["5", [secondary, true]]);
+        }, instaSpeed );
+
+        setTimeout( () => {
+            doNewSend(["c", [0, null]]);
+            doNewSend(["13c", [0, 6, 0]]);
+              autoaim = false;
+                        doNewSend(["ch", [Insta(true, 5)]])
+        }, instaSpeed1);
+        setTimeout( () =>{
+            doNewSend(["13c", [0, 20, 0]]);
+        }, 300 );
+
+    }
+
+    if(e.keyCode == 38 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        messageToggle = (messageToggle + 1) % 2;
+    }
+
+    if(e.keyCode == 40 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        clanToggle = (clanToggle + 1) % 2;
+    }
+
+    if(e.keyCode == 111 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["ch", [AutoOff(true, 5)]])
+        healToggle = 0;
+    }
+         if(e.keyCode == 103 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                    doNewSend(["ch", [Slow(true, 5)]])
+        healToggle = 1;
+    }
+      if(e.keyCode == 104 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                 doNewSend(["ch", [Timed(true, 5)]])
+        healToggle = 2;
+    }
+      if(e.keyCode == 105 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                 doNewSend(["ch", [Fast(true, 5)]])
+        healToggle = 3;
+    }
+      if(e.keyCode == 100 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                    doNewSend(["ch", [Spear(true, 5)]])
+        instaToggle = 1;
+    }
+      if(e.keyCode == 101 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                    doNewSend(["ch", [Sword(true, 5)]])
+        instaToggle = 2;
+    }
+      if(e.keyCode == 102 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                                    doNewSend(["ch", [Axe(true, 5)]])
+        instaToggle = 3;
+    }
+    if(e.keyCode == 72226 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+        doNewSend(["5", [secondary, true]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["c", [1]]);
+
+        setTimeout( () => {
+            doNewSend(["6", [12]]);
+        }, 300);
+
+        setTimeout( () => {
+            doNewSend(["6", [15]]);
+        }, 300);
+
+        setTimeout( () => {
+            doNewSend(["c", [0]]);
+            doNewSend(["13c", [0, 6, 0]]);
+            doNewSend(["5", [primary, true]]);
+            autoaim = false;
+        }, 300);
+    }
+  if(e.keyCode == 97 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [4]]);
+    }
+     if(e.keyCode == 79 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+
+       doNewSend(["13c", [0, 40, 0]]);
+       place(boostType);
+       doNewSend(["c", [1]]);
+       doNewSend(["c", [0]]);
+       doNewSend(["5", [primary, true]]);
+                     doNewSend(["ch", [Boost(true, 5)]])
+
+    }
+  if(e.keyCode == 77 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+          let characters;
+         characters = 'Soldier laod..';
+    }
+    if(e.keyCode == 98 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [15]]);
+    }
+
+  if(e.keyCode == 76 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        autoaim = true;
+        doNewSend(["5", [secondary, true]]);
+        doNewSend(["13c", [0, 53, 0]]);
+        doNewSend(["c", [1]]);
+
+        setTimeout( () => {
+            doNewSend(["6", [12]]);
+        }, 170);
+
+        setTimeout( () => {
+            doNewSend(["6", [15]]);
+        }, 170);
+
+        setTimeout( () => {
+            doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["5", [primary, true]]);
+                        doNewSend(["c", [0]]);
+            autoaim = false;
+            doNewSend(["ch", [Flappy(true, 5)]])
+        }, 240);
+    }
+    if(e.keyCode == 32 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+       autoaim = true;
+       doNewSend(["5", [primary, true]]);
+       doNewSend(["13c", [0, 7, 0]]);
+       doNewSend(["13c", [0, 0, 1]]);
+       doNewSend(["13c", [0, 18, 1]]);
+       place(spikeType, myPlayer.dir + toRad(45));
+       place(spikeType, myPlayer.dir - toRad(45));
+       doNewSend(["c", [1]]);
+
+       setTimeout( () => {
+           doNewSend(["13c", [0, 53, 0]]);
+           doNewSend(["ch", [Boom(true, 5)]])
+       }, 100);
+
+       setTimeout( () => {
+           doNewSend(["c", [0, null]]);
+           doNewSend(["13c", [0, 0, 0]]);
+           doNewSend(["13c", [0, 6, 0]]);
+          setTimeout( () => {
+
+doNewSend(["13c", [0, 13, 1]]);
+                    }, 45);
+                      setTimeout( () => {
+doNewSend(["13c", [0, 19 , 1]]);
+                                 }, 45);
+doNewSend(["13c", [0, 18, 1]]);
+                              setTimeout( () => {
+                    }, 45);
+doNewSend(["13c", [0, 21, 1]]);
+                              setTimeout( () => {
+       }, 45);
+           autoaim = false;
+       }, 200);
+   }
+    if(e.keyCode == 99 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [28]]);
+        doNewSend(["6", [25]]);
+    }
+    if(e.keyCode == 100 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [2]]);
+    }
+    if(e.keyCode == 101 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [5]]);
+    }
+ if(e.keyCode == 192 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+                 autoaim = true;
+                        setTimeout( () => {
+        doNewSend(["6", [4]]);
+        doNewSend(["6", [15]]);
+                }, 300 );
+                        setTimeout( () => {
+        doNewSend(["5", [primary, true]]);
+                             }, 200 );
+        doNewSend(["13c", [0, 7, 0]]);
+        doNewSend(["13c", [0, 0, 1]]);
+        doNewSend(["13c", [0, 19, 1]]);
+        doNewSend(["c", [1]]);
+  setTimeout( () => {
+                    doNewSend(["13c", [0, 53, 0]]);
+                }, 50 );
+
+        setTimeout( () => {
+            doNewSend(["5", [secondary, true]]);
+        }, instaSpeed );
+
+        setTimeout( () => {
+                    doNewSend(["13c", [0, 0, 0]]);
+            doNewSend(["5", [primary, true]]);
+            doNewSend(["c", [0, null]]);
+            doNewSend(["13c", [0, 6, 0]]);
+              autoaim = false;
+                        doNewSend(["ch", [Insta(true, 5)]])
+        }, instaSpeed1);
+        setTimeout( () =>{
+        doNewSend(["13c", [0, 11, 1]]);
+        }, 300 );
+
+    }
+    if(e.keyCode == 97 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [4]]);
+    }
+ if (e.keyCode == 188 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        for (let i=0;i<4;i++){
+             let angle = myPlayer.dir + toRad(i * 90);
+                                    doNewSend(["ch", [ichatplace(true, 5)]])
+
+             place(spikeType, angle)
+        }
+    }
+    if(e.keyCode == 98 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [15]]);
+    }
+    if(e.keyCode == 99 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [28]]);
+    }
+    if(e.keyCode == 105 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        doNewSend(["6", [28]]);
+        doNewSend(["6", [25]]);
+    }
+      if(e.keyCode == 106 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hatToggle = (hatToggle + 1) % 2;
+        if(healToggle == 0) {
+            if(hatToggle == 0) {
+                document.title = "MooMoo Hat:0%"
+            } else {
+                document.title = "MooMoo Hat:100%"
+            }
+        } else {
+            if(hatToggle == 0) {
+                document.title = "MooMoo Hat:0%"
+            } else {
+                document.title = "MooMoo Hat:100%"
+            }
+        }
+    }
+    if(e.keyCode == 106 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        hatToggle = (hatToggle + 1) % 2;
+        if(healToggle == 0) {
+            if(hatToggle == 0) {
+                document.title = "Moo Moo"
+            } else {
+                document.title = "Moo Moo"
+            }
+        } else {
+            if(hatToggle == 0) {
+                document.title = "Moo Moo"
+            } else {
+                document.title = "Moo Moo"
+            }
+        }
+    }
+})
+
+
+
+document.addEventListener('keyup', (e)=>{
+    spikePlacer.stop(e.keyCode);
+    boostPlacer.stop(e.keyCode);
+    boostSpiker.stop(e.keyCode);
+    Spiker3.stop(e.keyCode);
+    millPlacer.stop(e.keyCode);
+    turretPlacer.stop(e.keyCode);
+    healer.stop(e.keyCode);
+    wallPlacer.stop(e.keyCode);
+    if(e.keyCode == 7221 && document.activeElement.id.toLowerCase() !== 'chatbox') {
+        setTimeout( () => {
+            doNewSend(["33", [null]]);
+            boostDir = null;
+        }, 10);
+    }
+})
+
+
+function isElementVisible(e) {
+    return (e.offsetParent !== null);
+}
+
+
+function toRad(angle) {
+    return angle * 0.01745329251;
+}
+
+function dist(a, b){
+    return Math.sqrt( Math.pow((b.y-a[2]), 2) + Math.pow((b.x-a[1]), 2) );
+}
+
+function animate(space, chance) {
+    let result = '';
+    let characters;
+    if(space) {
+        characters = 'Project Arthemis 2020';
+    } else {
+        characters = 'Legit'
+    }
+    if(space) {
+        characters = characters.padStart((30 - characters.length) / 2 + characters.length)
+        characters = characters.padEnd(30);
+    }
+    let count = 0;
+    for (let i = 0; i < characters.length; i++ ) {
+       if(Math.floor(Math.random() * chance) == 1 && characters.charAt(i) != "" && count < 2 && characters.charAt(i) != " ") {
+           result += " ";
+           count++
+       } else {
+           result += characters.charAt(i);
+       }
+    }
+    return result;
+}
+function AutoOff(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'AutoHeal:0%';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function HealFast(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Heal Made By Xeu';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+
+function AimOn(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'AutoAim:100%';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function AimOff(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'AutoAim:0%';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+
+function Slow(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Heal:25%';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function Spear(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Polearm:Musket';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Sword(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Katana:Musket';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Axe(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Bow:CrossBow:Musket';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function Timed(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'AutoHeal:50%';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function Insta(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Insta Made By Xeu';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function Fast(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'Heal:100%';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function Soldier(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:Soldier';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function EmpHelm(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:EmpHelm';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Turret(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:Turret';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Tank(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:Tank';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Booster(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:BoosterHat';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Flipper(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:FlipperHat';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Samurai(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:Samurai';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function Bull(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:BullHelmet';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+function Pig(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'StoreEquip:PigHead';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+function OPBoost(space, chance) {
+   let result = '';
+   let characters;
+   if(space) {
+       characters = 'BoostInvi:ON';
+   }
+
+   let count = 0;
+   for (let i = 0; i < characters.length; i++ ) {
+      if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != " " && count < 0 && characters.charAt(i) != " ") {
+          result += "";
+          count++
+      } else {
+          result += characters.charAt(i);
+      }
+   }
+   return result;
+}
+
+
+$( "#errorNotification" ).after( '<div id="moddedMenu"><div class="titleMM">Project Arthemis</div><div class="one"><label class="switch"></span></label><div class="two"><div class="text"><b>Century Golden Edition<br><label class="container">Auto Heal<input type="checkbox" id="myCheckheal"><span class="checkmark"></span></label><label class="container">ProMap<input type="checkbox" id="myCheck"><span class="checkmark"></span></label><label class="container">Hat Hacking<input type="checkbox" id="myCheckhathacking"><span class="checkmark"></span></label><label class="container">Auto Bull<input type="checkbox" id="autobullid"><span class="checkmark"></span></label><div class="i-palomita">Helper-<a href="https://www.youtube.com/channel/UChujyWNvKA2u_TkpAvvWxqA"></a></div></div><hr></b></div></div>');
+
+// auto bull check
+var autobullid = document.querySelector("#autobullid")
+autobullid.addEventListener('change', function() {
+    if (this.checked) {
+        autobullcodes = true
+        doNewSend(["ch", ["Auto Bull ON"]]);
+    } else {
+        autobullcodes = false
+        doNewSend(["ch", ["Auto Bull OFF"]]);
+    }
+})
+var autobullcodes = false;
+document.addEventListener("mousedown", buttonPress, false);
+function buttonPress(e) {
+    if (e.button == 0) {
+        if (autobullcodes == true) {
+            hat(ID_BullHelmet)
+            acc(0)
+            doNewSend(["5", [primary, true]]);
+            setTimeout(() => {
+                if(isEnemyNear == false) {
+                            if (myPlayer.y < 2400){
+                                hat(15);
+                            } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+                                hat(31);
+                            } else {
+                                hat(12);
+                            }
+                            acc(11);
+                }
+                           if(isEnemyNear == true) {
+                            if (myPlayer.y < 2400){
+                                hat(6);
+                            } else if (myPlayer.y > 6850 && myPlayer.y < 7550){
+                                hat(6);
+                            } else {
+                                hat(6);
+                            }
+                            acc(21);
+                }
+            }, 100);
+        }
+    }
+    }
+var checkboxheal = document.querySelector("#myCheckheal") // auto heal check
+checkboxheal.addEventListener('change', function() {
+   if (this.checked) {
+             healToggle = true;
+               doNewSend(["ch", ["Auto Heal ON"]]);
+   } else {
+         healToggle = false;
+               doNewSend(["ch", ["Auto Heal OFF"]]);
+   }
+})
+var checkboxhathacking = document.querySelector("#myCheckhathacking")
+checkboxhathacking.addEventListener('change', function() {
+   if (this.checked) {
+             hatToggle = true;
+               doNewSend(["ch", ["Hat-Hacking ON"]]);
+   } else {
+         hatToggle = false;
+               doNewSend(["ch", ["Hat-Hacking OFF"]]);
+   }
+})
+var checkbox = document.querySelector("#myCheck")
+checkbox.addEventListener('change', function() {
+   if (this.checked) {
+       $("#mapDisplay").css({background: `url('https://i.imgur.com/fgFsQJp.png')`});
+       console.log('checked')
+                      doNewSend(["ch", ["Map ON"]]);
+   } else {
+       $("#mapDisplay").css({background: `rgba(0, 0, 0, 0.25)`})
+       console.log('unchecked')
+                      doNewSend(["ch", ["Map OFF"]]);
+   }
+})
+
+//Check Codes
+var styleItem = document.createElement("style");
+styleItem.type = "text/css";
+styleItem.appendChild(document.createTextNode(`
+.keyPressLow {
+    margin-left: 8px;
+    font-size: 16px;
+    margin-right: 8px;
+    height: 25px;
+    width: 50px;
+    background-color: #fcfcfc;
+    border-radius: 3.5px;
+    border: none;
+    text-align: center;
+    color: #000000;
+    border: 0.5px solid #f2f2f2;
+}
+
+.menuPrompt {
+    font-size: 17px;
+    font-family: 'Hammersmith One';
+    color: #000000;
+    flex: 0.2;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-content {
+    margin: 10% auto;
+    width: 40%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modal-header h2,
+.modal-footer h3 {
+  margin: 0;
+}
+
+.modal-header {
+    background: #ff0000;
+    padding: 15px;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-body {
+    padding: 10px 20px;
+    background: #fff;
+}
+
+.modal-footer {
+    background: #ff0000;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.closeBtn {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    color: #fff;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+ position: absolute;
+ opacity: 0;
+ cursor: pointer;
+ height: 0;
+ width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+ position: absolute;
+ top: 0;
+ left: 0;
+ height: 25px;
+ width: 25px;
+ background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+ background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+ background-color: #ff1100;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+ content: "";
+ position: absolute;
+ display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+ display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+ left: 9px;
+ top: 5px;
+ width: 5px;
+ height: 10px;
+ border: solid white;
+ border-width: 0 3px 3px 0;
+ -webkit-transform: rotate(45deg);
+ -ms-transform: rotate(45deg);
+ transform: rotate(45deg);
+}
+
+`))
+document.head.appendChild(styleItem);
+
+
+
+document.title = "Moo Moo"
+
+function update() {
+    for (let i=0;i<9;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            primary = i;
+        }
+    }
+
+    for (let i=9;i<16;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            secondary = i;
+        }
+    }
+
+    for (let i=16;i<19;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            foodType = i - 16;
+        }
+    }
+
+    for (let i=19;i<22;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            wallType = i - 16;
+        }
+    }
+
+    for (let i=22;i<26;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            spikeType = i - 16;
+        }
+    }
+
+    for (let i=26;i<29;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            millType = i - 16;
+        }
+    }
+
+    for (let i=29;i<31;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            mineType = i - 16;
+        }
+    }
+
+    for (let i=31;i<33;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString()))){
+            boostType = i - 16;
+        }
+    }
+
+    for (let i=33;i<39;i++){
+        if (isElementVisible(document.getElementById("actionBarItem" + i.toString())) && i != 36){
+            turretType = i - 16;
+        }
+    }
+
+    spawnpadType = 36;
+}
+//AND DONT FORGET: YOU - PRO!!!
+//AND ADRIAN BEST!!!
+
+
+        var ID_BloodThirster = 55;
+    var ID_FlipperHat = 31;
+    var ID_WinterCap = 15;
+    var ID_AssassinGear = 56;
+    var ID_SoldierHelmet = 6;
+    var ID_AntiVenomGear = 23;
+    var ID_PigHead = 29;
+    var ID_MusketeerHat = 32;
+    var ID_MedicGear = 13;
+    var ID_BullHelmet = 7;
+    var ID_EmpHelmet = 22;
+    var ID_BoosterHat = 12;
+    var ID_BarbarianArmor = 26;
+    var ID_BullMask = 46;
+    var ID_WindmillHat = 14;
+    var ID_SpikeGear = 11;
+    var ID_BushidoArmor = 16;
+    var ID_SamuraiArmor = 20;
+    var ID_ScavengerGear = 27;
+    var ID_TankGear = 40;
+
+    //Turret Gear. "Use if you want to"
+    var ID_TurretGear = 53;
+
+    document.addEventListener('keydown', function(e) {
+        if(e.keyCode === 66 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+            doNewSend(["ch", [PigHead(true, 5)]])
+        storeEquip(ID_PigHead);
+        }
+        else if (e.keyCode === 48 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+            doNewSend(["13c", [0, 0 , 1]]);
+                                    doNewSend(["13c", [0, 19 , 1]]);
+            doNewSend(["13c", [0, 21 , 1]]);
+            doNewSend(["ch", [Tank(true, 5)]])
+        storeEquip(ID_TankGear);
+        }
+        else if (e.keyCode === 77 && document.activeElement.id.toLowerCase() !== 'chatbox')
+
+        {
+            doNewSend(["13c", [0, 0 , 1]]);
+                                    doNewSend(["13c", [0, 19 , 1]]);
+            doNewSend(["ch", [Soldier(true, 5)]])
+        storeEquip(ID_SoldierHelmet);
+        }
+
+        else if (e.keyCode === 18 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+           doNewSend(["13c", [0, 0 , 1]]);
+                                    doNewSend(["13c", [0, 19 , 1]]);
+            doNewSend(["13c", [0, 21 , 1]]);
+            doNewSend(["ch", [Bull(true, 5)]])
+        storeEquip(ID_BullHelmet);
+        }
+        else if (e.keyCode === 84 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+            doNewSend(["ch", [Turret(true, 5)]])
+        storeEquip(ID_TurretGear);
+        }
+        else if (e.keyCode === 73 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+            doNewSend(["ch", [Samurai(true, 5)]])
+        storeEquip (ID_SamuraiArmor);
+        }
+          else if (e.keyCode === 16 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+            doNewSend(["13c", [0, 11 , 1]]);
+            doNewSend(["ch", [Booster(true, 5)]])
+        storeEquip (ID_BoosterHat);
+        }
+          else if (e.keyCode === 74 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+            doNewSend(["ch", [Flipper(true, 5)]])
+        storeEquip (ID_FlipperHat);
+        }
+          else if (e.keyCode === 89 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                        doNewSend(["13c", [0, 0 , 1]]);
+                        doNewSend(["13c", [0, 19 , 1]]);
+            doNewSend(["13c", [0, 21 , 1]]);
+            doNewSend(["ch", [EmpHelm(true, 5)]])
+        storeEquip (ID_EmpHelmet);
+        }
+            else if (e.keyCode === 51 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                     doNewSend(["ch", [Heal(true, 5)]])
+        storeEquip(ID_FakeHat8);
+        }
+
+                            else if (e.keyCode === 86 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                     doNewSend(["ch", [Spike(true, 5)]])
+        storeEquip(ID_FakeHat8);
+        }
+                            else if (e.keyCode === 78 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                     doNewSend(["ch", [Mils(true, 5)]])
+        storeEquip(ID_FakeHat8);
+        }
+                                    else if (e.keyCode === 49 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                     doNewSend(["ch", [Primary(true, 5)]])
+        storeEquip(ID_FakeHat8);
+        }
+                                    else if (e.keyCode === 50 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                     doNewSend(["ch", [Secondary(true, 5)]])
+        storeEquip(ID_FakeHat8);
+        }
+                      else if (e.keyCode === 85 && document.activeElement.id.toLowerCase() !== 'chatbox')
+        {
+                     doNewSend(["ch", [chat(true, 5)]])
+        storeEquip(ID_FakeHat8);
+        }
+
+        var accessories = [{
+		id: 12,
+		name: "Snowball",
+		price: 1e3,
+		scale: 105,
+		xOff: 18,
+		desc: "no effect"
+	}, {
+		id: 9,
+		name: "Tree Cape",
+		price: 1e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 10,
+		name: "Stone Cape",
+		price: 1e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 3,
+		name: "Cookie Cape",
+		price: 1500,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 8,
+		name: "Cow Cape",
+		price: 2e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 11,
+		name: "Monkey Tail",
+		price: 2e3,
+		scale: 97,
+		xOff: 25,
+		desc: "Super speed but reduced damage",
+		spdMult: 1.35,
+		dmgMultO: .2
+	}, {
+		id: 17,
+		name: "Apple Basket",
+		price: 3e3,
+		scale: 80,
+		xOff: 12,
+		desc: "slowly regenerates health over time",
+		healthRegen: 1
+	}, {
+		id: 6,
+		name: "Winter Cape",
+		price: 3e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 4,
+		name: "Skull Cape",
+		price: 4e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 5,
+		name: "Dash Cape",
+		price: 5e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 2,
+		name: "Dragon Cape",
+		price: 6e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 1,
+		name: "Super Cape",
+		price: 8e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 7,
+		name: "Troll Cape",
+		price: 8e3,
+		scale: 90,
+		desc: "no effect"
+	}, {
+		id: 14,
+		name: "Thorns",
+		price: 1e4,
+		scale: 115,
+		xOff: 20,
+		desc: "no effect"
+	}, {
+		id: 15,
+		name: "Blockades",
+		price: 1e4,
+		scale: 95,
+		xOff: 15,
+		desc: "no effect"
+	}, {
+		id: 20,
+		name: "Devils Tail",
+		price: 1e4,
+		scale: 95,
+		xOff: 20,
+		desc: "no effect"
+	}, {
+		id: 16,
+		name: "Sawblade",
+		price: 12e3,
+		scale: 90,
+		spin: !0,
+		xOff: 0,
+		desc: "deal damage to players that damage you",
+		dmg: .15
+	}, {
+		id: 13,
+		name: "Angel Wings",
+		price: 15e3,
+		scale: 138,
+		xOff: 22,
+		desc: "slowly regenerates health over time",
+		healthRegen: 3
+	}, {
+		id: 19,
+		name: "Shadow Wings",
+		price: 15e3,
+		scale: 138,
+		xOff: 22,
+		desc: "increased movement speed",
+		spdMult: 1.1
+	}, {
+		id: 18,
+		name: "Blood Wings",
+		price: 2e4,
+		scale: 178,
+		xOff: 26,
+		desc: "restores health when you deal damage",
+		healD: .2
+	}, {
+		id: 21,
+		name: "Corrupt X Wings",
+		price: 2e4,
+		scale: 178,
+		xOff: 26,
+		desc: "deal damage to players that damage you",
+		dmg: .25
+	}]
+
+
+var hats = hats = [{
+		id: 45,
+		name: "Shame!",
+		dontSell: !0,
+		price: 0,
+		scale: 120,
+		desc: "hacks are for losers"
+	}, {
+		id: 51,
+		name: "Moo Cap",
+		price: 0,
+		scale: 120,
+		desc: "coolest mooer around"
+	}, {
+		id: 50,
+		name: "Apple Cap",
+		price: 0,
+		scale: 120,
+		desc: "apple farms remembers"
+	}, {
+		id: 28,
+		name: "Moo Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 29,
+		name: "Pig Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 30,
+		name: "Fluff Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 36,
+		name: "Pandou Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 37,
+		name: "Bear Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 38,
+		name: "Monkey Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 44,
+		name: "Polar Head",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 35,
+		name: "Fez Hat",
+		price: 0,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 42,
+		name: "Enigma Hat",
+		price: 0,
+		scale: 120,
+		desc: "join the enigma army"
+	}, {
+		id: 43,
+		name: "Blitz Hat",
+		price: 0,
+		scale: 120,
+		desc: "hey everybody i'm blitz"
+	}, {
+		id: 49,
+		name: "Bob XIII Hat",
+		price: 0,
+		scale: 120,
+		desc: "like and subscribe"
+	}, {
+		id: 8,
+		name: "Bummle Hat",
+		price: 100,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 2,
+		name: "Straw Hat",
+		price: 500,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 15,
+		name: "Winter Cap",
+		price: 600,
+		scale: 120,
+		desc: "allows you to move at normal speed in snow",
+		coldM: 1
+	}, {
+		id: 5,
+		name: "Cowboy Hat",
+		price: 1e3,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 4,
+		name: "Ranger Hat",
+		price: 2e3,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 18,
+		name: "Explorer Hat",
+		price: 2e3,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 31,
+		name: "Flipper Hat",
+		price: 2500,
+		scale: 120,
+		desc: "have more control while in water",
+		watrImm: !0
+	}, {
+		id: 1,
+		name: "Marksman Cap",
+		price: 3e3,
+		scale: 120,
+		desc: "increases arrow speed and range",
+		aMlt: 1.3
+	}, {
+		id: 10,
+		name: "Bush Gear",
+		price: 3e3,
+		scale: 160,
+		desc: "allows you to disguise yourself as a bush"
+	}, {
+		id: 48,
+		name: "Halo",
+		price: 3e3,
+		scale: 120,
+		desc: "no effect"
+	}, {
+		id: 6,
+		name: "Soldier Helmet",
+		price: 4e3,
+		scale: 120,
+		desc: "reduces damage taken but slows movement",
+		spdMult: .94,
+		dmgMult: .75
+	}, {
+		id: 23,
+		name: "Anti Venom Gear",
+		price: 4e3,
+		scale: 120,
+		desc: "makes you immune to poison",
+		poisonRes: 1
+	}, {
+		id: 13,
+		name: "Medic Gear",
+		price: 5e3,
+		scale: 110,
+		desc: "slowly regenerates health over time",
+		healthRegen: 3
+	}, {
+		id: 9,
+		name: "Miners Helmet",
+		price: 5e3,
+		scale: 120,
+		desc: "earn 1 extra gold per resource",
+		extraGold: 1
+	}, {
+		id: 32,
+		name: "Musketeer Hat",
+		price: 5e3,
+		scale: 120,
+		desc: "reduces cost of projectiles",
+		projCost: .5
+	}, {
+		id: 7,
+		name: "Bull Helmet",
+		price: 6e3,
+		scale: 120,
+		desc: "increases damage done but drains health",
+		healthRegen: -5,
+		dmgMultO: 1.5,
+		spdMult: .96
+	}, {
+		id: 22,
+		name: "Emp Helmet",
+		price: 6e3,
+		scale: 120,
+		desc: "turrets won't attack but you move slower",
+		antiTurret: 1,
+		spdMult: .7
+	}, {
+		id: 12,
+		name: "Booster Hat",
+		price: 6e3,
+		scale: 120,
+		desc: "increases your movement speed",
+		spdMult: 1.16
+	}, {
+		id: 26,
+		name: "Barbarian Armor",
+		price: 8e3,
+		scale: 120,
+		desc: "knocks back enemies that attack you",
+		dmgK: .6
+	}, {
+		id: 21,
+		name: "Plague Mask",
+		price: 1e4,
+		scale: 120,
+		desc: "melee attacks deal poison damage",
+		poisonDmg: 5,
+		poisonTime: 6
+	}, {
+		id: 46,
+		name: "Bull Mask",
+		price: 1e4,
+		scale: 120,
+		desc: "bulls won't target you unless you attack them",
+		bullRepel: 1
+	}, {
+		id: 14,
+		name: "Windmill Hat",
+		topSprite: !0,
+		price: 1e4,
+		scale: 120,
+		desc: "generates points while worn",
+		pps: 1.5
+	}, {
+		id: 11,
+		name: "Spike Gear",
+		topSprite: !0,
+		price: 1e4,
+		scale: 120,
+		desc: "deal damage to players that damage you",
+		dmg: .45
+	}, {
+		id: 53,
+		name: "Turret Gear",
+		topSprite: !0,
+		price: 1e4,
+		scale: 120,
+		desc: "you become a walking turret",
+		turret: {
+			proj: 1,
+			range: 700,
+			rate: 2500
+		},
+		spdMult: .5
+	}, {
+		id: 20,
+		name: "Samurai Armor",
+		price: 12e3,
+		scale: 120,
+		desc: "increased attack speed and fire rate",
+		atkSpd: .78
+	}, {
+		id: 16,
+		name: "Bushido Armor",
+		price: 12e3,
+		scale: 120,
+		desc: "restores health when you deal damage",
+		healD: .4
+	}, {
+		id: 27,
+		name: "Scavenger Gear",
+		price: 15e3,
+		scale: 120,
+		desc: "earn double points for each kill",
+		kScrM: 2
+	}, {
+		id: 40,
+		name: "Tank Gear",
+		price: 15e3,
+		scale: 120,
+		desc: "increased damage to buildings but slower movement",
+		spdMult: .3,
+		bDmg: 3.3
+	}, {
+		id: 52,
+		name: "Thief Gear",
+		price: 15e3,
+		scale: 120,
+		desc: "steal half of a players gold when you kill them",
+		goldSteal: .5
+	}]
+
+
+var objects = [{
+		id: 0,
+		name: "food",
+		layer: 0
+	}, {
+		id: 1,
+		name: "walls",
+		place: !0,
+		limit: 30,
+		layer: 0
+	}, {
+		id: 2,
+		name: "spikes",
+		place: !0,
+		limit: 15,
+		layer: 0
+	}, {
+		id: 3,
+		name: "mill",
+		place: !0,
+		limit: 7,
+		layer: 1
+	}, {
+		id: 4,
+		name: "mine",
+		place: !0,
+		limit: 1,
+		layer: 0
+	}, {
+		id: 5,
+		name: "trap",
+		place: !0,
+		limit: 6,
+		layer: -1
+	}, {
+		id: 6,
+		name: "booster",
+		place: !0,
+		limit: 12,
+		layer: -1
+	}, {
+		id: 7,
+		name: "turret",
+		place: !0,
+		limit: 2,
+		layer: 1
+	}, {
+		id: 8,
+		name: "watchtower",
+		place: !0,
+		limit: 12,
+		layer: 1
+	}, {
+		id: 9,
+		name: "buff",
+		place: !0,
+		limit: 4,
+		layer: -1
+	}, {
+		id: 10,
+		name: "spawn",
+		place: !0,
+		limit: 1,
+		layer: -1
+	}, {
+		id: 11,
+		name: "sapling",
+		place: !0,
+		limit: 2,
+		layer: 0
+	}, {
+		id: 12,
+		name: "blocker",
+		place: !0,
+		limit: 3,
+		layer: -1
+	}, {
+		id: 13,
+		name: "teleporter",
+		place: !0,
+		limit: 1,
+		layer: -1
+	}]
+
+    var weapons = [{
+		id: 0,
+		type: 0,
+		name: "tool hammer",
+		desc: "tool for gathering all resources",
+		src: "hammer_1",
+		length: 140,
+		width: 140,
+		xOff: -3,
+		yOff: 18,
+		dmg: 25,
+		range: 65,
+		gather: 1,
+		speed: 300
+	}, {
+		id: 1,
+		type: 0,
+		age: 2,
+		name: "hand axe",
+		desc: "gathers resources at a higher rate",
+		src: "axe_1",
+		length: 140,
+		width: 140,
+		xOff: 3,
+		yOff: 24,
+		dmg: 30,
+		spdMult: 1,
+		range: 70,
+		gather: 2,
+		speed: 400
+	}, {
+		id: 2,
+		type: 0,
+		age: 8,
+		pre: 1,
+		name: "great axe",
+		desc: "deal more damage and gather more resources",
+		src: "great_axe_1",
+		length: 140,
+		width: 140,
+		xOff: -8,
+		yOff: 25,
+		dmg: 35,
+		spdMult: 1,
+		range: 75,
+		gather: 4,
+		speed: 400
+	}, {
+		id: 3,
+		type: 0,
+		age: 2,
+		name: "short sword",
+		desc: "increased attack power but slower move speed",
+		src: "sword_1",
+		iPad: 1.3,
+		length: 130,
+		width: 210,
+		xOff: -8,
+		yOff: 46,
+		dmg: 35,
+		spdMult: .85,
+		range: 110,
+		gather: 1,
+		speed: 300
+	}, {
+		id: 4,
+		type: 0,
+		age: 8,
+		pre: 3,
+		name: "katana",
+		desc: "greater range and damage",
+		src: "samurai_1",
+		iPad: 1.3,
+		length: 130,
+		width: 210,
+		xOff: -8,
+		yOff: 59,
+		dmg: 40,
+		spdMult: .8,
+		range: 118,
+		gather: 1,
+		speed: 300
+	}, {
+		id: 5,
+		type: 0,
+		age: 2,
+		name: "polearm",
+		desc: "long range melee weapon",
+		src: "spear_1",
+		iPad: 1.3,
+		length: 130,
+		width: 210,
+		xOff: -8,
+		yOff: 53,
+		dmg: 45,
+		knock: .2,
+		spdMult: .82,
+		range: 142,
+		gather: 1,
+		speed: 700
+	}, {
+		id: 6,
+		type: 0,
+		age: 2,
+		name: "bat",
+		desc: "fast long range melee weapon",
+		src: "bat_1",
+		iPad: 1.3,
+		length: 110,
+		width: 180,
+		xOff: -8,
+		yOff: 53,
+		dmg: 20,
+		knock: .7,
+		range: 110,
+		gather: 1,
+		speed: 300
+	}, {
+		id: 7,
+		type: 0,
+		age: 2,
+		name: "daggers",
+		desc: "really fast short range weapon",
+		src: "dagger_1",
+		iPad: .8,
+		length: 110,
+		width: 110,
+		xOff: 18,
+		yOff: 0,
+		dmg: 20,
+		knock: .1,
+		range: 65,
+		gather: 1,
+		hitSlow: .1,
+		spdMult: 1.13,
+		speed: 100
+	}, {
+		id: 8,
+		type: 0,
+		age: 2,
+		name: "stick",
+		desc: "great for gathering but very weak",
+		src: "stick_1",
+		length: 140,
+		width: 140,
+		xOff: 3,
+		yOff: 24,
+		dmg: 1,
+		spdMult: 1,
+		range: 70,
+		gather: 7,
+		speed: 400
+	}, {
+		id: 9,
+		type: 1,
+		age: 6,
+		name: "hunting bow",
+		desc: "bow used for ranged combat and hunting",
+		src: "bow_1",
+		req: ["wood", 4],
+		length: 120,
+		width: 120,
+		xOff: -6,
+		yOff: 0,
+		projectile: 0,
+		spdMult: .75,
+		speed: 600
+	}, {
+		id: 10,
+		type: 1,
+		age: 6,
+		name: "great hammer",
+		desc: "hammer used for destroying structures",
+		src: "great_hammer_1",
+		length: 140,
+		width: 140,
+		xOff: -9,
+		yOff: 25,
+		dmg: 10,
+		spdMult: .88,
+		range: 75,
+		sDmg: 7.5,
+		gather: 1,
+		speed: 400
+	}, {
+		id: 11,
+		type: 1,
+		age: 6,
+		name: "wooden shield",
+		desc: "blocks projectiles and reduces melee damage",
+		src: "shield_1",
+		length: 120,
+		width: 120,
+		shield: .2,
+		xOff: 6,
+		yOff: 0,
+		spdMult: .7
+	}, {
+		id: 12,
+		type: 1,
+		age: 8,
+		pre: 9,
+		name: "crossbow",
+		desc: "deals more damage and has greater range",
+		src: "crossbow_1",
+		req: ["wood", 5],
+		aboveHand: !0,
+		armS: .75,
+		length: 120,
+		width: 120,
+		xOff: -4,
+		yOff: 0,
+		projectile: 2,
+		spdMult: .7,
+		speed: 700
+	}, {
+		id: 13,
+		type: 1,
+		age: 9,
+		pre: 12,
+		name: "repeater crossbow",
+		desc: "high firerate crossbow with reduced damage",
+		src: "crossbow_2",
+		req: ["wood", 10],
+		aboveHand: !0,
+		armS: .75,
+		length: 120,
+		width: 120,
+		xOff: -4,
+		yOff: 0,
+		projectile: 3,
+		spdMult: .7,
+		speed: 300
+	}, {
+		id: 14,
+		type: 1,
+		age: 6,
+		name: "mc grabby",
+		desc: "steals resources from enemies",
+		src: "grab_1",
+		length: 130,
+		width: 210,
+		xOff: -8,
+		yOff: 53,
+		dmg: 0,
+		steal: 250,
+		knock: .2,
+		spdMult: 1.05,
+		range: 125,
+		gather: 0,
+		speed: 700
+	}, {
+		id: 15,
+		type: 1,
+		age: 9,
+		pre: 12,
+		name: "musket",
+		desc: "slow firerate but high damage and range",
+		src: "musket_1",
+		req: ["stone", 10],
+		aboveHand: !0,
+		rec: .35,
+		armS: .6,
+		hndS: .3,
+		hndD: 1.6,
+		length: 205,
+		width: 205,
+		xOff: 25,
+		yOff: 0,
+		projectile: 5,
+		hideProjectile: !0,
+		spdMult: .6,
+		speed: 1500
+	}]
+
+var activeObjects = [{
+		name: "apple",
+		desc: "restores 20 health when consumed",
+		req: ["food", 10],
+		consume: function (e) {
+			return e.changeHealth(20, e)
+		},
+		scale: 22,
+		holdOffset: 15
+	}, {
+		age: 3,
+		name: "cookie",
+		desc: "restores 40 health when consumed",
+		req: ["food", 15],
+		consume: function (e) {
+			return e.changeHealth(40, e)
+		},
+		scale: 27,
+		holdOffset: 15
+	}, {
+		age: 7,
+		name: "pizza",
+		desc: "restores 30 health and another 50 over 5 seconds",
+		req: ["food", 30],
+		consume: function (e) {
+			return !!(e.changeHealth(30, e) || e.health < 100) && (e.dmgOverTime.dmg = -10, e.dmgOverTime.doer = e, e.dmgOverTime.time = 5, !0)
+		},
+		scale: 27,
+		holdOffset: 15
+	}, {
+		name: "wood wall",
+		desc: "provides protection for your village",
+		req: ["wood", 10],
+		projDmg: !0,
+		health: 380,
+		scale: 50,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 3,
+		name: "stone wall",
+		desc: "provides improved protection for your village",
+		req: ["stone", 25],
+		health: 900,
+		scale: 50,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 7,
+		pre: 1,
+		name: "castle wall",
+		desc: "provides powerful protection for your village",
+		req: ["stone", 35],
+		health: 1500,
+		scale: 52,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		name: "spikes",
+		desc: "damages enemies when they touch them",
+		req: ["wood", 20, "stone", 5],
+		health: 400,
+		dmg: 20,
+		scale: 49,
+		spritePadding: -23,
+		holdOffset: 8,
+		placeOffset: -5
+	}, {
+		age: 5,
+		name: "greater spikes",
+		desc: "damages enemies when they touch them",
+		req: ["wood", 30, "stone", 10],
+		health: 500,
+		dmg: 35,
+		scale: 52,
+		spritePadding: -23,
+		holdOffset: 8,
+		placeOffset: -5
+	}, {
+		age: 9,
+		pre: 1,
+		name: "poison spikes",
+		desc: "poisons enemies when they touch them",
+		req: ["wood", 35, "stone", 15],
+		health: 600,
+		dmg: 30,
+		pDmg: 5,
+		scale: 52,
+		spritePadding: -23,
+		holdOffset: 8,
+		placeOffset: -5
+	}, {
+		age: 9,
+		pre: 2,
+		name: "spinning spikes",
+		desc: "damages enemies when they touch them",
+		req: ["wood", 30, "stone", 20],
+		health: 500,
+		dmg: 45,
+		turnSpeed: .003,
+		scale: 52,
+		spritePadding: -23,
+		holdOffset: 8,
+		placeOffset: -5
+	}, {
+		name: "windmill",
+		desc: "generates gold over time",
+		req: ["wood", 50, "stone", 10],
+		health: 400,
+		pps: 1,
+		turnSpeed: .0016,
+		spritePadding: 25,
+		iconLineMult: 12,
+		scale: 45,
+		holdOffset: 20,
+		placeOffset: 5
+	}, {
+		age: 5,
+		pre: 1,
+		name: "faster windmill",
+		desc: "generates more gold over time",
+		req: ["wood", 60, "stone", 20],
+		health: 500,
+		pps: 1.5,
+		turnSpeed: .0025,
+		spritePadding: 25,
+		iconLineMult: 12,
+		scale: 47,
+		holdOffset: 20,
+		placeOffset: 5
+	}, {
+		age: 8,
+		pre: 1,
+		name: "power mill",
+		desc: "generates more gold over time",
+		req: ["wood", 100, "stone", 50],
+		health: 800,
+		pps: 2,
+		turnSpeed: .005,
+		spritePadding: 25,
+		iconLineMult: 12,
+		scale: 47,
+		holdOffset: 20,
+		placeOffset: 5
+	}, {
+		age: 5,
+		type: 2,
+		name: "mine",
+		desc: "allows you to mine stone",
+		req: ["wood", 20, "stone", 100],
+		iconLineMult: 12,
+		scale: 65,
+		holdOffset: 20,
+		placeOffset: 0
+	}, {
+		age: 5,
+		type: 0,
+		name: "sapling",
+		desc: "allows you to farm wood",
+		req: ["wood", 150],
+		iconLineMult: 12,
+		colDiv: .5,
+		scale: 110,
+		holdOffset: 50,
+		placeOffset: -15
+	}, {
+		age: 4,
+		name: "pit trap",
+		desc: "pit that traps enemies if they walk over it",
+		req: ["wood", 30, "stone", 30],
+		trap: !0,
+		ignoreCollision: !0,
+		hideFromEnemy: !0,
+		health: 500,
+		colDiv: .2,
+		scale: 50,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 4,
+		name: "boost pad",
+		desc: "provides boost when stepped on",
+		req: ["stone", 20, "wood", 5],
+		ignoreCollision: !0,
+		boostSpeed: 1.5,
+		health: 150,
+		colDiv: .7,
+		scale: 45,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 7,
+		doUpdate: !0,
+		name: "turret",
+		desc: "defensive structure that shoots at enemies",
+		req: ["wood", 200, "stone", 150],
+		health: 800,
+		projectile: 1,
+		shootRange: 700,
+		shootRate: 2200,
+		scale: 43,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 7,
+		name: "platform",
+		desc: "platform to shoot over walls and cross over water",
+		req: ["wood", 20],
+		ignoreCollision: !0,
+		zIndex: 1,
+		health: 300,
+		scale: 43,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 7,
+		name: "healing pad",
+		desc: "standing on it will slowly heal you",
+		req: ["wood", 30, "food", 10],
+		ignoreCollision: !0,
+		healCol: 15,
+		health: 400,
+		colDiv: .7,
+		scale: 45,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 9,
+		name: "spawn pad",
+		desc: "you will spawn here when you die but it will dissapear",
+		req: ["wood", 100, "stone", 100],
+		health: 400,
+		ignoreCollision: !0,
+		spawnPoint: !0,
+		scale: 45,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 7,
+		name: "blocker",
+		desc: "blocks building in radius",
+		req: ["wood", 30, "stone", 25],
+		ignoreCollision: !0,
+		blocker: 300,
+		health: 400,
+		colDiv: .7,
+		scale: 45,
+		holdOffset: 20,
+		placeOffset: -5
+	}, {
+		age: 7,
+		name: "teleporter",
+		desc: "teleports you to a random point on the map",
+		req: ["wood", 60, "stone", 60],
+		ignoreCollision: !0,
+		teleport: !0,
+		health: 200,
+		colDiv: .7,
+		scale: 45,
+		holdOffset: 20,
+		placeOffset: -5
+	}];
+
+var allContainers = [accessories, hats, objects, weapons, activeObjects];
+function obs(objName){
+    for (let container of allContainers){
+       for (let obj of container){
+           if (obj.name.toLowerCase() == objName.toLowerCase()){
+             return obj.id;
+           }
+       }
+    }
+
+    return -1;
+
+}
+
+function activeObs(objName){
+    for (var i=0;i<activeObjects.length;i++){
+      let activeObj = activeObjects[i];
+      if (activeObj.name.toLowerCase() == objName.toLowerCase()){
+          return i;
+      }
+
+    }
+}
+
+       });
+
+// ==UserScript==
+// @name         Project Nova (Red)
+// @namespace    Project Nova (Red)
+// @version      1.0.0
+// @description  ...
+// @author       made by TigerYT edited by NoT BoT
+// @match        *://moomoo.io/*
+// @match        *://45.77.0.81/*
+// @match        *://dev.moomoo.io/*
+// @match        *://sandbox.moomoo.io/*
+// @require      https://code.jquery.com/jquery-3.3.1.slim.min.js
+// ==/UserScript==
+
+
+$( "#partyButton, #joinPartyButton" ).wrapAll( '<div class="partyWrap"></div>' );
+document.getElementById('loadingText').innerHTML = 'Project Arthemis';
+$( "#linksContainer2 > a:nth-child(1)" ).replaceWith( '<a href="./docs/versions.txt" target="_blank" class="menuLink">Project Arthemis - v0.0.3</a>' );
+document.getElementById('chatBox').placeholder = "Century Golden Edition";
+$( "#partyButton" ).replaceWith( '<span>Empty </span><i class="material-icons" style="font-size:30px;vertical-align:middle"></i>' );
+
+(function() {var css = [
+	"div#adCard, ",
+	"  #twitterFollow, ",
+	"  #youtubeFollow, ",
+	"  #downloadButtonContainer, ",
+	"  #followText, ",
+	"  #promoImg {",
+	"    display: none;",
+	"  }",
+	"",
+	"  #featuredYoutube > a.ytLink, ",
+	"  a {",
+	"    color: #FFFF00 !important;",
+	"    font-size: 20px;",
+	"    margin-top: 0px;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  a:hover {",
+	"    color: ##FFFF00 !important;",
+	"  }",
+	"",
+	"  #youtuberOf, ",
+	"  #linksContainer2, ",
+	"  .partyWrap {",
+	"    background: rgba(0,0,0,0.6);",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"    border-radius: 10px;",
+	"    padding: 10px;",
+	"    font-size: 20px;",
+	"    position: absolute;",
+	"    color: #fff;",
+	"  }",
+	"",
+	"  .partyWrap {",
+	"    min-height: 80px;",
+	"    min-width: 160px;",
+	"    top: 10px;",
+	"    right: 10px;",
+	"  }",
+	"",
+	"  #youtuberOf {",
+	"    top: 10px;",
+	"    left: 10px;",
+	"  }",
+	"",
+	"  #followText {",
+	"    min-height: 200px;",
+	"    bottom: 10px;",
+	"    left: 10px;",
+	"  }",
+	"",
+	"  #linksContainer2 {",
+	"    bottom: 10px;",
+	"    right: 10px;",
+	"    color: transparent;",
+	"  }",
+	"",
+	"  .menuCard {",
+	"    background: rgba(0,0,0,0.6);",
+	"    border-radius: 10px;",
+	"    border: 10px solid rgba(0,0,0,0.9);",
+	"    box-shadow: none;",
+	"    overflow:auto;",
+	"  }",
+	"",
+	"  ::-webkit-scrollbar {",
+	"    width: 10px;",
+	"    border-right: 2px solid #FFFF00;",
+	"  }",
+	"",
+	"  ::-webkit-scrollbar-thumb {",
+	"    border: 2px solid #FFFF00;",
+	"  }",
+	"",
+	"  ::-webkit-scrollbar-thumb:hover {",
+	"    background: #FFFF00;",
+	"  }",
+	"",
+	"  ::-webkit-scrollbar-thumb:active {",
+	"    background: black;",
+	"    border: 2px solid #FFFF00;",
+	"  }",
+	"",
+	"  .menuHeader {",
+	"    font-size: 24px;",
+	"    color: #eeeeee;",
+	"    margin-bottom: 3px;",
+	"    border-bottom: 3px solid #eee;",
+	"  }",
+	"",
+	"  .menuHeader:first-child {",
+	"    margin-bottom: 30px;",
+	"  }",
+	"",
+	"  .menuText {",
+	"    font-size: 18px;",
+	"    color: #ccc;",
+	"    margin-bottom: 10px;",
+	"  }",
+	"",
+	"  .ytLink {",
+	"    color: #FFFF00;",
+	"    font-size: 24px;",
+	"    text-decoration: none;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  .menuButton {",
+	"    color: #fff;",
+	"    background-color: transparent;",
+	"    border: 5px solid #FFFF00;",
+	"    position: relative;",
+	"    display: inline-flex;",
+	"    padding: 0px 70px;",
+	"    font-family: denk one;",
+	"    transition: color .5s;",
+	"    overflow: hidden;",
+	"    width: 100%;",
+	"    justify-content: center;",
+	"  }",
+	"",
+	"  .menuButton:hover {",
+	"    color: #FFFFFF !important;",
+	"    border: 5px solid #FFFF00;",
+	"    cursor: pointer;",
+	"    background-color: transparent;",
+	"  }",
+	"",
+	"  .menuButton:before {",
+	"    content: \'\';",
+	"    position: absolute;",
+	"    top: 0;",
+	"    left: 0;",
+	"    width: 130%; ",
+	"    height: 10000%;",
+	"    background: #FFFF00;",
+	"    border-right: 20px solid #FFFF00;",
+	"    z-index: -1;",
+	"    transform-origin:0 0 ;",
+	"    transform:translateX(-112%) skewX(45deg);",
+	"    transition: transform .5s;",
+	"  }",
+	"",
+	"  .menuButton:hover:before {",
+	"    color: #FFFFFF !important;",
+	"    transform: translateX(-20%) skewX(45deg);",
+	"  }",
+	"",
+	"  .menuCard span {",
+	"    margin: 10px;",
+	"  }",
+	"",
+	"  #promoHolderImg > img {",
+	"    width: 300px;",
+	"    height: 94px;",
+	"  }",
+	"",
+	"  #guideCard {",
+	"    max-height: 282px;",
+	"  }",
+	"",
+	"  .skinColorItem {",
+	"    transition: 1s;",
+	"    border: 3px solid #FFFF00;",
+	"  }",
+	"",
+	"  select {",
+	"    background: #cc0000;",
+	"    border-radius: 5px;",
+	"    border: 3px solid #FFFF00;",
+	"    margin-bottom: 10px;",
+	"    color: #fff;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  select:hover {",
+	"    background: #FFFF00;",
+	"    border: 3px solid #FFFF00;",
+	"  }",
+	"",
+	"  #pre-content-container {",
+	"    display: none!important;",
+	"  }",
+	"",
+	"  .uiElement, ",
+	"  .resourceDisplay, ",
+	"  .actionBarItem {",
+	"    background-color: rgba(0,0,0,0.6) !important;",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"    border-radius: 50px !important;",
+	"    color: #FFFF00;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  .uiElement:hover, ",
+	"  .resourceDisplay:hover, ",
+	"  .actionBarItem:hover {",
+	"    background-color: rgba(0,0,0,0.5) !important;",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"    border-radius: 50px !important;",
+	"    color: #FFFF00;",
+	"  }",
+	"",
+	"  #topInfoHolder, #itemInfoHolder, #mapDisplay, #chatBox  { ",
+	"    background-color: rgba(0,0,0,0.6) !important;",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"    border-radius: 10px !important;",
+	"    color: #FFFF00;",
+	"  }",
+	"",
+	"  #itemInfoHolder { ",
+	"    -webkit-text-stroke: transparent;",
+	"  }",
+	"",
+	"  .material-icons { ",
+	"    color: #FFFF00;",
+	"    font-size: 31px;",
+	"    -webkit-text-stroke: 1.5px #fff;",
+	"  }",
+	"",
+	"  #altServer > a > i {",
+	"    font-size: 30px !important;",
+	"    -webkit-text-stroke: transparent !important;",
+	"  }",
+	"",
+	"  #ageText { ",
+	"    font-size: 40px !important;",
+	"    color: #FFFF00;",
+	"    -webkit-text-stroke: 1.5px #fff;",
+	"    margin-bottom: 30px;",
+	"  }",
+	"",
+	"  #ageBarBody {",
+	"    background-color: #FFFF00;",
+	"    border: 3px solid #fff",
+	"  }",
+	"",
+	"  #ageBar {",
+	"    background-color: rgba(0,0,0,0.6) !important;",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"    height: 10px;",
+	"    padding-bottom: 10px;",
+	"    margin-bottom: 20px;",
+	"  }",
+	"",
+	"  .actionBarItem {",
+	"    width: 65px;",
+	"    height: 65px;",
+	"    background-position: center; ",
+	"    background-size: 55px 55px;",
+	"  }",
+	"",
+	"  #aBox {",
+	"    color: #FFFF00!important;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  #chatBox::placeholder {",
+	"    color: #FFFF00!important;",
+	"  }",
+	"",
+	"  #chatBox:hover {",
+	"    background: rgba(0,0,0,0.5)!important;",
+	"  }",
+	"",
+	"  #chatBox:hover::placeholder {",
+	"    color: #FFFF00 !important;",
+	"  }",
+	"",
+	"  #leaderboard, .leaderboardItem[style*=\"color: rgb(255, 255, 255);\"] {",
+	"    color: #FFFF00 !important;",
+	"  }",
+	"",
+	"  .ytLink:hover {",
+	"    color: #FFFF00;",
+	"  }",
+	"",
+	"  #nameInput {",
+	"    background: #fff;",
+	"    border: 5px solid #FFFF00;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  #nameInput::placeholder {",
+	"    color: #FFFF00;",
+	"    transition: 0.5s;",
+	"  }",
+	"",
+	"  #nameInput:hover {",
+	"    background: #FFFF00;",
+	"    color: #fff;",
+	"  }",
+	"",
+	"  #nameInput:hover::placeholder {",
+	"    background: #FFFF00;",
+	"    color: #fff;",
+	"  }",
+	"",
+	"  #linksContainer2 {",
+	"    max-height: 500px;",
+	"    width: 250px;",
+	"  }",
+	"",
+	"  #linksContainer2 > * {",
+	"    display:table-cell;",
+	"    vertical-align:middle;",
+	"    text-align: center;",
+	"    width:700px;",
+	"  }",
+	"  ",
+	"  .storeTab, ",
+	"  #storeHolder, ",
+	"  #allianceHolder, ",
+	"  #allianceInput, ",
+	"  .allianceButtonM {",
+	"    background: rgba(0,0,0,0.6);",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"  }",
+	"",
+	"  .storeItem, ",
+	"  .storeTab, ",
+	"  .allianceButtonM, ",
+	"  #allianceInput::placeholder, ",
+	"  .allianceItem {",
+	"    color: #FFFF00 !important;",
+	"  }",
+	"",
+	"  .storeItem, ",
+	"  .storeTab, ",
+	"  .allianceButtonM, ",
+	"  #allianceInput::placeholder, ",
+	"  .allianceItem, ",
+	"  .joinAlBtn {",
+	"    color: #FFFF00 !important;",
+	"  }",
+	"",
+	"  .storeItem:hover, ",
+	"  .storeTab:hover, ",
+	"  .allianceButtonM:hover,",
+	"  .allianceItem:hover, ",
+	"  .joinAlBtn:hover {",
+	"    color: #FFFF00 !important;",
+	"  }",
+	"",
+	"  #allianceInput, ",
+	"  #killCounter {",
+	"    color: #FFFF00;",
+	"  }",
+	"  ",
+	"  #allianceInput:hover {",
+	"    background: rgba(0,0,0,0.5);",
+	"    color: #FFFF00;",
+	"  }",
+	"",
+	"  #allianceInput:hover::placeholder{",
+	"    color: #FFFF00;",
+	"  }",
+	"",
+	"  #linksContainer2 > *:first-child {",
+	"    border-bottom: 3px solid #FFFF00;",
+	"  }",
+	"",
+	"  #moddedMenu {",
+	"    position: absolute;",
+	"    top: 3.25%;",
+	"    left: 0px;",
+	"    width: 3%;",
+	"    height: 45.0%;",
+	"    background: rgba(0,0,0,0.6);",
+	"    border: 3px solid rgba(0,0,0,0.9);",
+	"    border-top-right-radius: 30px;",
+	"    border-bottom-right-radius: 30px;",
+	"    transition: 1s;",
+	"    z-index: 999;",
+	"  }",
+	"",
+	"  #moddedMenu:hover {",
+	"    width: 20%;",
+	"  }",
+	"",
+	"  #youtuberOf {",
+	"    bottom: 10px;",
+	"    top: auto;",
+	"  }",
+	"",
+	"  .titleMM {",
+	"    color: #FFFF00;",
+	"    border-bottom: 3px solid #FFFF00;",
+	"    font-size: 32px;",
+	"    transform: rotate(90deg);",
+	"    white-space: nowrap;",
+	"    margin-top: 250%;",
+	"    transition: 1s;",
+	"  }",
+	"",
+	"  #moddedMenu:hover > .titleMM {",
+	"    transform: rotate(0deg) translate(0,-1580%)",
+	"  }",
+	"",
+	"  .switch {",
+	"    margin-top: 5px;",
+	"    margin-left: 10px;",
+	"    position: absolute;",
+	"    width: 60px;",
+	"    height: 34px;",
+	"    transition: opacity 1s;",
+	"    opacity: 0;",
+	"  }",
+	"",
+	"  .text {",
+	"    bottom: 76%;",
+	"    position: absolute;",
+	"    color: #eee;",
+	"    font-size: 20px;",
+	"    left: 0%;",
+	"    display: none;",
+	"    transition: 1s;",
+	"  }",
+	"",
+	"  .text > b { ",
+	"    font-size: 20px;",
+	"    color: #FFFF00;",
+	"  }",
+	"",
+	"  b:hover { ",
+	"    color: #fc9f9f;",
+	"  }",
+	"",
+	"  .one > .text {",
+	"    top: 5.5%;",
+	"  }",
+	"",
+	"  .two > .text {",
+	"    top: 10.7%;",
+	"  }",
+	"",
+	"  .three > .text {",
+	"    top: 37.5%;",
+	"  }",
+	"",
+	"  .four > .text {",
+	"    top: 47.5%;",
+	"  }",
+	"",
+	"  .five > .text {",
+	"    top: 57.5%;",
+	"  }",
+	"",
+	"  .six > .text {",
+	"    top: 67.5%;",
+	"  }",
+	"",
+	"  .seven > .text {",
+	"    top: 77.5%;",
+	"  }",
+	"",
+	"  .eight > .text {",
+	"    top: 87.5%;",
+	"  }",
+	"",
+	"  #moddedMenu:hover .switch {",
+	"    opacity: 1;",
+	"  }",
+	"",
+	"  #moddedMenu:hover .text {",
+	"    display: block;",
+	"  }",
+	"",
+	"  .one > .switch {",
+	"    top: 15%;",
+	"  }",
+	"",
+	"  .two > .switch {",
+	"    top: 25%;",
+	"  }",
+	"",
+	"  .three > .switch {",
+	"    top: 35%;",
+	"  }",
+	"",
+	"  .four > .switch {",
+	"    top: 45%;",
+	"  }",
+	"",
+	"  .five > .switch {",
+	"    top: 55%;",
+	"  }",
+	"",
+	"  .six > .switch {",
+	"    top: 65%;",
+	"  }",
+	"",
+	"  .seven > .switch {",
+	"    top: 75%;",
+	"  }",
+	"",
+	"  .eight > .switch {",
+	"    top: 85%;",
+	"  }",
+	"",
+	"  .switch input {",
+	"    display:none;",
+	"  }",
+	"",
+	"  .slider {",
+	"    position: absolute;",
+	"    cursor: pointer;",
+	"    top: 0;",
+	"    left: 0;",
+	"    right: 0;",
+	"    bottom: 0;",
+	"    background-color: #888;",
+	"    -webkit-transition: .4s;",
+	"    transition: .4s;",
+	"  }",
+	"",
+	"  .slider:before {",
+	"    position: absolute;",
+	"    content: \"\";",
+	"    height: 26px;",
+	"    width: 26px;",
+	"    left: 4px;",
+	"    bottom: 4px;",
+	"    background-color: white;",
+	"    -webkit-transition: .4s;",
+	"    transition: .4s;",
+	"  }",
+	"",
+	"  input:checked + .slider {",
+	"    background-color: #FFFF00;",
+	"  }",
+	"  ",
+	"  input:focus + .slider {",
+	"    box-shadow: 0 0 1px #FFFF00;",
+	"  }",
+	"",
+	"  input:checked + .slider:before {",
+	"    -webkit-transform: translateX(26px);",
+	"    -ms-transform: translateX(26px);",
+	"    transform: translateX(26px);",
+	"  }",
+	"",
+	"  .slider.round {",
+	"    border-radius: 34px;",
+	"  }",
+	"",
+	"  .slider.round:before {",
+	"    border-radius: 50%;",
+	"  }"
+].join("\n");
+if (typeof GM_addStyle != "undefined") {
+	GM_addStyle(css);
+} else if (typeof PRO_addStyle != "undefined") {
+	PRO_addStyle(css);
+} else if (typeof addStyle != "undefined") {
+	addStyle(css);
+} else {
+	var node = document.createElement("style");
+	node.type = "text/css";
+	node.appendChild(document.createTextNode(css));
+	var heads = document.getElementsByTagName("head");
+	if (heads.length > 0) {
+		heads[0].appendChild(node);
+	} else {
+		// no head yet, stick it whereever
+		document.documentElement.appendChild(node);
+	}
+}
+})();
+// auto chat codes part 2 menu
+var TankGearKey = 0;
+var AssassinGearKey = 0;
+var BullHelmetKey = 0;
+var SoldierHelmetKey = 0;
+var TurretKey = 0;
+var BoosterHatKey = 0;
+var uneqiup = 0;
+var SpikeGearKey = 0;
+var BushGearKey = 0;
+var EmpHelmetKey = 0;
+var SamuraiArmorKey = 0;
+var ScavengerGearKey = 0;
+try {
+    document.getElementById("moomooio_728x90_home").style.display = "none";
+    $("moomooio728x90_home").parent().css({display: "none"});
+} catch (e) {
+    console.log("There was an error removing the ads.");
+}
+
+
+var menuChange = document.createElement("div");
+menuChange.className = "menuCard";
+menuChange.id = "mainSettings";
+menuChange.innerHTML = `
+<div id="simpleModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="closeBtn">&times;</span>
+            <h2 style="font-size: 17px;">Project Arthimes</h2>
+        </div>
+        <div class="modal-body" style="font-size: 17px;">
+            <div class="flexControl">
+          <fieldset>
+          <legend>Auto Chats</legend>
+               <br>AutoChat<input type="text" value="" id="ach1" width="100" height="50"/><br>
+               <br>InstaChat<input type="text" value="" id="ach2" /><br>
+               <br>HealChat<input type="text" value="" id="ach3" /><br>
+               <br>HotkeyChat<input type="text" value="" id="ach4" /><br>
+          <fieldset>
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
+`
+document.body.appendChild(menuChange)
+
+
+$("#tankGear").on("input", () => {
+    var cval = $("#tankGear").val();
+    if (cval){
+        TankGearKey = cval.toUpperCase();
+        TankGearKey = TankGearKey.charCodeAt(0);
+        console.log(TankGearKey);
+    }
+});
+
+$("#scavengerGear").on("input", () => {
+    var cval = $("#scavengerGear").val();
+    if (cval){
+        ScavengerGearKey = cval.toUpperCase();
+        ScavengerGearKey = ScavengerGearKey.charCodeAt(0);
+        console.log(ScavengerGearKey);
+    }
+});
+
+$("#assassinGear").on("input", () => {
+    var cval = $("#assassinGear").val();
+    if (cval){
+        AssassinGearKey = cval.toUpperCase();
+        AssassinGearKey = AssassinGearKey.charCodeAt(0);
+        console.log(AssassinGearKey);
+    }
+});
+
+$("#empHelmet").on("input", () => {
+    var cval = $("#empHelmet").val();
+    if (cval){
+        EmpHelmetKey = cval.toUpperCase();
+        EmpHelmetKey = EmpHelmetKey.charCodeAt(0);
+        console.log(EmpHelmetKey);
+    }
+});
+
+$("#bullHelm").on("input", () => {
+    var cval = $("#bullHelm").val();
+    if (cval){
+        BullHelmetKey = cval.toUpperCase();
+        BullHelmetKey = BullHelmetKey.charCodeAt(0);
+        console.log(BullHelmetKey);
+    }
+});
+
+$("#bushGear").on("input", () => {
+    var cval = $("#bushGear").val();
+    if (cval){
+        BushGearKey = cval.toUpperCase();
+        BushGearKey = BushGearKey.charCodeAt(0);
+        console.log(BushGearKey);
+    }
+});
+
+
+$("#samuraiArmor").on("input", () => {
+    var cval = $("#samuraiArmor").val();
+    if (cval){
+        SamuraiArmorKey = cval.toUpperCase();
+        SamuraiArmorKey = SamuraiArmorKey.charCodeAt(0);
+        console.log(SamuraiArmorKey);
+    }
+});
+
+$("#soldier").on("input", () => {
+    var cval = $("#soldier").val();
+    if (cval){
+        SoldierHelmetKey = cval.toUpperCase();
+        SoldierHelmetKey = SoldierHelmetKey.charCodeAt(0);
+        console.log(SoldierHelmetKey);
+    }
+});
+
+$("#turret").on("input", () => {
+    var cval = $("#turret").val();
+    if (cval){
+        TurretKey = cval.toUpperCase();
+        TurretKey = TurretKey.charCodeAt(0);
+        console.log(TurretKey);
+    }
+});
+
+$("#booster").on("input", () => {
+    var cval = $("#booster").val();
+    if (cval){
+        BoosterHatKey = cval.toUpperCase();
+        BoosterHatKey = BoosterHatKey.charCodeAt(0);
+        console.log(BoosterHatKey);
+    }
+});
+
+var styleItem1 = document.createElement("style");
+styleItem1.type = "text/css";
+styleItem1.appendChild(document.createTextNode(`
+.keyPressLow {
+    margin-left: 8px;
+    font-size: 16px;
+    margin-right: 8px;
+    height: 25px;
+    width: 50px;
+    background-color: #fcfcfc;
+    border-radius: 3.5px;
+    border: none;
+    text-align: center;
+    color: #4A4A4A;
+    border: 0.5px solid #f2f2f2;
+}
+
+.menuPrompt {
+    font-size: 17px;
+    font-family: 'Hammersmith One';
+    color: #4A4A4A;
+    flex: 0.2;
+    text-align: center;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.modalx {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.Msgmodal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-content {
+    margin: 10% auto;
+    width: 40%;
+    box-shadow: 0 5px 8px 0 orange, 0 7px 20px 0 orange;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modal-headerx h2,
+.modal-footerx h3 {
+  margin: 0;
+}
+
+.modal-headerx {
+    background: light;
+    padding: 15px;
+    color: orange;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-footerx {
+    background: orange
+    padding: 10px;
+    color: light;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.modal-headerwtf h2,
+.modal-footerwtf h3 {
+  margin: 0;
+}
+
+.modal-headerwtf {
+    background: yello;
+    padding: 15px;
+    color: orange;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-footerwtf {
+    background: red;
+    padding: 10px;
+    color: light;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.modal-header h2,
+.modal-footer h3 {
+  margin: 0;
+}
+
+.modal-header {
+    background: light;
+    padding: 15px;
+    color: orange;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.modal-body {
+    padding: 10px 20px;
+    background: frost;
+}
+
+.modal-footer {
+    background: #05A905;
+    padding: 10px;
+    color: black;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.closeBtn {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    color: black;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: #dd4a42;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closeBtnx {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    color: #fff;
+}
+
+.closeBtnx:hover,
+.closeBtnx:focus {
+    color: #dd4a42;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.MsgcloseBtn {
+    color: #ccc;
+    float: right;
+    font-size: 30px;
+    color: #fff;
+}
+
+.MsgcloseBtn:hover,
+.MsgcloseBtn:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Customize the label (the container) */
+.containerx {
+  display: block;
+  position: relative;
+  padding-left: 55px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerx input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmarkx {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.containerx:hover input ~ .checkmarkx {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a red background */
+.containerx input:checked ~ .checkmarkx {
+  background-color: #e0432b;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmarkx:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a red background */
+.container input:checked ~ .checkmark {
+  background-color: #0074FF;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+`))
+document.head.appendChild(styleItem1);
+
+
+$("#adCard").css({display: "none"});
+
+
+document.addEventListener('keydown', function(e) {
+   if (e.keyCode == uneqiup && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       console.log("done")
+       storeEquip(0);
+   } else if (e.keyCode == 27){
+       if (modal.style.display = "none") {
+           modal.style.display = "block";
+       } else {
+           modal.style.display = "none";
+       }
+   } else if (e.keyCode == ScavengerGearKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_ScavengerGearGear);
+   } else if (e.keyCode == AssassinGearKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_AssassinGear);
+   } else if (e.keyCode == BushGearKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_BushGear);
+   } else if (e.keyCode == EmpHelmetKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_EmpHelmet);
+   } else if (e.keyCode == TankGearKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_TankGear);
+   } else if (e.keyCode == SamuraiArmorKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_SamuraiArmor);
+   } else if (e.keyCode == SoldierHelmetKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_SoldierHelmet);
+   } else if (e.keyCode == BullHelmetKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_BullHelmet);
+   } else if (e.keyCode == BoosterHatKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_BoosterHat);
+      } else if (e.keyCode == SpikeGearKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_SpikeGear);
+   } else if (e.keyCode == TurretKey && document.activeElement.id.toLowerCase() !== 'chatbox'){
+       storeEquip(ID_TurretGear);
+   }
+})
+
+// Get modal element
+var modal = document.getElementById("simpleModal");
+// Get close button
+var closeBtn = document.getElementsByClassName('closeBtn')[0];
+
+// Events
+closeBtn.addEventListener('click', closeModal);
+window.addEventListener('click', outsideClick);
+
+// Close
+function closeModal() {
+ modal.style.display = 'none';
+}
+
+// Close If Outside Click
+function outsideClick(e) {
+ if (e.target == modal) {
+   modal.style.display = 'none';
+ }
+}
+
+var lel = false;
+function nothig() {
+    var lel = false;
+    console.log("fOlS");
+}
+setInterval(() => {
+    var ach = document.getElementById("ach1").value;
+    if(ach == 1) {
+        nothig();
+    } else {
+        doNewSend(["ch", [ach]]);
+    }
+}, 1000);
+
+unsafeWindow.admob = {
+    requestInterstitialAd: ()=>{},
+    showInterstitialAd: ()=>{}
+}
+function ichatinsta(space, chance) {
+    var ach1 = document.getElementById("ach2").value;
+    let result = '';
+    let characters;
+    if(space) {
+        characters = ach1;
+    }
+    if(space) {
+        characters = characters.padStart((30 - characters.length) / 2 + characters.length)
+        characters = characters.padEnd(30);
+    }
+    let count = 0;
+    for (let i = 0; i < characters.length; i++ ) {
+       if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != "-" && count < 0 && characters.charAt(i) != " ") {
+           result += "";
+           count++
+       } else {
+           result += characters.charAt(i);
+       }
+    }
+    return result;
+}
+function ichatheal(space, chance) {
+    var ach1 = document.getElementById("ach3").value;
+    let result = '';
+    let characters;
+    if(space) {
+        characters = ach1;
+    }
+    if(space) {
+        characters = characters.padStart((30 - characters.length) / 2 + characters.length)
+        characters = characters.padEnd(30);
+    }
+    let count = 0;
+    for (let i = 0; i < characters.length; i++ ) {
+       if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != "-" && count < 0 && characters.charAt(i) != " ") {
+           result += "";
+           count++
+       } else {
+           result += characters.charAt(i);
+       }
+    }
+    return result;
+}
+function ichatplace(space, chance) {
+    var ach1 = document.getElementById("ach4").value;
+    let result = '';
+    let characters;
+    if(space) {
+        characters = ach1;
+    }
+    if(space) {
+        characters = characters.padStart((30 - characters.length) / 2 + characters.length)
+        characters = characters.padEnd(30);
+    }
+    let count = 0;
+    for (let i = 0; i < characters.length; i++ ) {
+       if(Math.floor(Math.random() * chance) == 0 && characters.charAt(i) != "-" && count < 0 && characters.charAt(i) != " ") {
+           result += "";
+           count++
+       } else {
+           result += characters.charAt(i);
+       }
+    }
+    return result;
+}
+// fealturet mootubers
+$("#youtuberOf").append(`<div class="spanLink" id="featuredYoutube"><a target="_blank" class="ytLink" href="https://www.youtube.com/channel/UCcbazeLuEYxdvZSocPh2IRw"><i class="material-icons" style="vertical-align: top;"></i> Xeuu</a><div class="spanLink" id="featuredYoutube"><a target="_blank" class="ytLink" href="https://www.youtube.com/channel/UChujyWNvKA2u_TkpAvvWxqA"><i class="material-icons" style="vertical-align: top;"></i> </a></div></div>`);// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        http://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Your code here...
+})();
